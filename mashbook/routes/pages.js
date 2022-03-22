@@ -372,7 +372,7 @@ router.get('/addtomashup/:id', (req, res) => {
 });
 
 //add to mashup page
-router.post('/addtomashup/:id', async (req, res) => {
+router.post('/addtomashup/:id', (req, res) => {
 
     //if no file is uploaded
     if (!req.files) {
@@ -380,7 +380,7 @@ router.post('/addtomashup/:id', async (req, res) => {
             message: 'No file selected'
         });
     }
-
+    
     //get the file
     const file = req.files.myFile;
     const path = "./public/uploads/" + date + file.name;
@@ -406,7 +406,7 @@ router.post('/addtomashup/:id', async (req, res) => {
         }
     });
 
-
+    /*
     //check if file is safe
     const axios = require('axios');
     const FormData = require('form-data');
@@ -445,7 +445,7 @@ router.post('/addtomashup/:id', async (req, res) => {
             message: 'Inappropriate content detected. Please try again.'
         });
     }
-
+    */
     /*
     //if safe, upload to s3
     else {
@@ -513,7 +513,10 @@ router.post('/addtomashup/:id', async (req, res) => {
                             { input: secondaryPicture, blend: compositionType , opacity: 0.5 }
                         ])
                         .toFile('./public/uploads/mashup' + date+ "-" + file.name, (err, info) => {
-                            if (err) throw err;
+                            //if error notify user about file being too big
+                            if (err){
+                                console.log("File needs to be smaller.")
+                            }
                         });
 
                 });
