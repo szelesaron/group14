@@ -1,0 +1,52 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    
+    <li class="breadcrumb-item active" aria-current="page">Edit User</li>
+  </ol>
+</nav>
+
+{{#if alert}}
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+    {{alert}}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+{{/if}}
+
+{{#each content}}
+<form method="POST" action="/adminedituser/{{this.username}}"> 
+  <div class="col-6">
+    <div class="form-floating mb-3">
+      <input type="text" class="form-control" id="floatingInput" value="{{this.username}}" placeholder="username" name="username" readonly>
+      <label for="floatingInput">Username</label>
+    </div>
+  </div>
+  <div class="col-6">
+    <div class="form-floating mb-3">
+      <input type="text" class="form-control" id="floatingInput" value="{{this.accountType}}" placeholder="Account Type" name="accountType" readonly>
+      <label for="floatingInput">Account Type</label>
+    </div>
+  </div>
+  <div class="col-6">
+    <div class="form-floating mb-3">
+      <input type="email" class="form-control" id="floatingInput" value="{{this.email}}" placeholder="email@email.com" name="email" readonly>
+      <label for="floatingInput">Email</label>
+    </div>
+  </div>
+  <div class="col-6">
+    <div class="form-floating mb-3">
+      <input type="text" class="form-control" id="floatingInput" value="{{this.password}}" placeholder="Password" name="password">
+      <label for="floatingInput">Password</label>
+    </div>
+  </div>
+   <div class="col-6">
+    <div class="form-floating mb-3">
+      <input type="text" class="form-control" id="floatingInput" value="{{this.userStatus}}" placeholder="User Status" name="userStatus">
+      <label for="floatingInput">User Status (Active/ Suspended)</label>
+    </div>
+  </div>
+  
+  <div class="col-12 d-grid">
+    <button class="btn btn-primary" type="submit">Submit</button>
+  </div>
+</form>
+{{/each}}

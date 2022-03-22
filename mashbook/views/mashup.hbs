@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/images/favi.png">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="/mashup-style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@100;300;600&family=Libre+Baskerville&display=swap" rel="stylesheet">
+    <title>Weekly | Mashbook</title>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="nav-wrapper">
+            <img src="/images/logograd.PNG" class="brand-img" alt="">
+            <input type="text" class="search-box" placeholder="search">
+            <div class="nav-items">
+
+                <button onclick="location.href='/newsfeed'" class = "icon"><img src="/images/home.PNG" class="icon" alt=""></button>
+
+                <button onclick="location.href='/post';" class="icon"><img src="/images/add.PNG" class="icon" alt=""></button>
+
+                <button onclick="" class = "icon"><img src="/images/like.PNG" class="icon" alt=""></button>
+
+                <button onclick="location.href='/settings';" class="icon"><img src="/images/option.PNG" class="icon" alt=""></button>
+
+                <button onclick="location.href='/profile';" class="icon user-profile"></button>
+
+            </div>
+        </div>
+    </nav>
+
+    <div class="foryou-weekly">
+        <button onclick="location.href='/newsfeed';"><b class="foryou">For You</b></button>
+        <button onclick=""><b class="weekly">|</b></button>
+        <button onclick=""><b class="weekly">Weekly</b></button>
+    </div>
+
+    <div class="container" style="justify-content: center; background-color: white;margin-bottom: 10px; border-radius: 10px; margin-top: 45px;">
+
+        <!-- account row-->
+        <div class="row" style="border: 1px solid #dbdbdb; padding:5px 23px; border-radius: 10px;">
+            <p style="display: contents;">
+                <i class='fas fa-user-circle' style='color:#dbdbdb; font-size:45px;'></i> &nbsp;
+                <span style="font-weight: 600; padding-top: 10px;font-family: 'Barlow Condensed', sans-serif;font-size:19px;">mashbookteam</span>
+            </p>
+        </div>
+        <!-- images row-->
+        <div class="row" style="border: 1px solid #DDDDDD;padding:13px 13px; border-radius: 10px;">
+            <!-- col 1 with single image-->
+            <div class="col-md-6 col-sm-12">
+                <p style="text-align: center;font-size: 20px;font-family: 'Barlow Condensed', sans-serif;font-weight: 600;">Original</p>
+                <img src="/images/img1.PNG" style="border: 1px solid #dbdbdb;margin:23px;width: -webkit-fill-available; border-radius: 10px;">
+            </div>
+            <!-- col 2 with grid images-->
+            <div class="col-md-6 col-sm-12">
+                <p style="text-align: center;font-size: 20px;font-family: 'Barlow Condensed', sans-serif;font-weight: 600;">Featured Mashups</p>
+                <div class="grid-container">
+
+
+                    <!-- grid in scroll bar-->
+
+                    <div class="scrollbar" id="style-1">
+                        <div class="force-overflow">
+
+                            <div class="grid-item">
+                                <p>
+                                    <i class='fas fa-user-circle' style='color:#DDDDDD;; font-size:25px;'></i> &nbsp;
+                                    <span>team</span>
+                                </p>
+                                <img src="/images/a.PNG">
+                            </div>
+                            <div class="grid-item">
+                                <p>
+                                    <i class='fas fa-user-circle' style='color:#DDDDDD;; font-size:25px;'></i>&nbsp;
+                                    <span>team</span>
+                                </p>
+                                <img src="/images/b.PNG">
+                            </div>
+                            <div class="grid-item">
+                                <p>
+                                    <i class='fas fa-user-circle' style='color:#DDDDDD;; font-size:25px;'></i> &nbsp;
+                                    <span>team</span>
+                                </p>
+                                <img src="/images/a.PNG">
+                            </div>
+                            <div class="grid-item">
+                                <p>
+                                    <i class='fas fa-user-circle' style='color:#DDDDDD;; font-size:25px;'></i> &nbsp;
+                                    <span>team</span>
+                                </p>
+                                <img src="/images/b.PNG">
+                            </div>
+                            <div class="grid-item">
+                                <p>
+                                    <i class='fas fa-user-circle' style='color:#DDDDDD;; font-size:25px;'></i> &nbsp;
+                                    <span>team</span>
+                                </p>
+                                <img src="/images/a.PNG">
+                            </div>
+                            <div class="grid-item">
+                                <p>
+                                    <i class='fas fa-user-circle' style='color:#DDDDDD;; font-size:25px;'></i> &nbsp;
+                                    <span>team</span>
+                                </p>
+                                <img src="/images/b.PNG">
+                            </div>
+                            <div class="grid-item">
+                                <p>
+                                    <i class='fas fa-user-circle' style='color:#DDDDDD;; font-size:25px;'></i> &nbsp;
+                                    <span>team</span>
+                                </p>
+                                <img src="/images/b.PNG">
+                            </div>
+                            <div class="grid-item">
+                                <p>
+                                    <i class='fas fa-user-circle' style='color:#DDDDDD;; font-size:25px;'></i> &nbsp;
+                                    <span>team</span>
+                                </p>
+                                <img src="/images/b.PNG">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!--
+    <div class="container img-uplaod" style="position: relative;">
+        <label for="file-input">
+            <img src="images/plus.png" class="icon-bottom" style="width: 90px;">
+          </label>
+        <input id="file-input" class="hidden" type="file" />
+    </div>
+    -->
+
+
+
+</body>
+
+</html>

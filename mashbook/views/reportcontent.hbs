@@ -1,0 +1,68 @@
+Would you like to report this content
+{{#each content}}
+
+   <form action="/contentdeleted/{{this.contentId}}" method="POST">
+      <div class="container">
+       
+        <button type="submit">Delete</button>
+      </div>
+    </form>
+   
+<a href="/newsfeed/">Back to Newsfeed</a>
+{{/each}}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post | Mashbook</title>
+    <link rel="stylesheet" href="/newsfeed_style.css">
+    <link rel="icon" href="/images/favi.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@100;300;600&family=Libre+Baskerville&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-wrapper">
+            <img src="/images/logograd.PNG" class="brand-img" alt="">
+            <input type="text" class="search-box" placeholder="search">
+            <div class="nav-items">
+
+                <button onclick="location.href='/newsfeed'" class = "icon"><img src="/images/home.PNG" class="icon" alt=""></button>
+
+                <button onclick="location.href='/post';" class="icon"><img src="/images/add.PNG" class="icon" alt=""></button>
+
+                <button onclick="" class = "icon"><img src="/images/like.PNG" class="icon" alt=""></button>
+
+                <button onclick="location.href='/settings';" class="icon"><img src="/images/option.PNG" class="icon" alt=""></button>
+
+                <button onclick="location.href='/profile';" class="icon user-profile"></button>
+
+            </div>
+        </div>
+    </nav>
+
+    <section class="main">
+        <div class="upload-wrapper">
+            <div class="upload">
+             
+                    Would you like to report this content?
+{{#each content}}
+
+   <form action="/contentreported/{{this.contentId}}" method="POST">
+      <div class="container">
+       
+        <input type="submit" value="Report"></input>
+      </div>
+    </form>
+   
+<a href="/newsfeed/">Back to Newsfeed</a>
+{{/each}}
+            </div>
+        </div>
+    </section>
+</body>
+</html>

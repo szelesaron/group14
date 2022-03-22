@@ -1,0 +1,59 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    
+    <li class="breadcrumb-item active" aria-current="page">Edit Content</li>
+  </ol>
+</nav>
+
+{{#if alert}}
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+    {{alert}}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+{{/if}}
+
+{{#each content}}
+<form class="row g-3 needs-validation" method="POST" action="/admineditcontent/{{this.contentId}}" novalidate> 
+  <div class="col-6">
+    <div class="form-floating mb-3">
+      <input type="text" class="form-control" id="floatingInput" value="{{this.userPosted}}" placeholder="userPosted" name="userPosted" readonly>
+      <label for="floatingInput">User Posted</label>
+    </div>
+  </div>
+  <div class="col-6">
+    <div class="form-floating mb-3">
+      <input type="text" class="form-control" id="floatingInput" value="{{this.datePosted}}" placeholder="datePosted" name="datePosted" readonly>
+      <label for="floatingInput">Date Posted</label>
+    </div>
+  </div>
+  <div class="col-6">
+    <div class="form-floating mb-3">
+      <img src="/{{this.path}}" class="post-image" alt="">
+    </div>
+  </div>
+  <div class="col-6">
+    <div class="form-floating mb-3">
+      <input type="text" class="form-control" id="floatingInput" value="{{this.contentStatus}}" placeholder="Content Status" name="contentStatus">
+      <label for="floatingInput">Content Status (Active/ Suspended)</label>
+    </div>
+  </div>
+  
+  <p>Remove a flag?</p>
+  <div>
+  <input type="radio" id="no" name="flagAnswer" value="{{this.contentFlagged}}" hidden checked>
+</div>
+<div>
+  <input type="radio" id="yes" name="flagAnswer" value="0">
+  <label for="yes">Yes</label>
+</div>
+
+<div>
+  <input type="radio" id="no" name="flagAnswer" value="1">
+  <label for="no">No</label>
+</div>
+
+  <div class="col-12 d-grid">
+    <button class="btn btn-primary" type="submit">Submit</button>
+  </div>
+</form>
+{{/each}}

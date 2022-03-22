@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/loginStylesheet.css">
+    <title>Mashbook - Login</title>
+</head>
+
+<body>
+    <form action="/auth/login" method="get">
+      <div class="container">
+        <div class="input-row">
+          <img src="/images/favi.png" alt="">
+        </div>
+        <h1>Login</h1> 
+          <div class="input-row">
+            <input type="username" id="username" name="username" placeholder="Username">
+          </div>
+          <div class="input-row">
+
+
+            <input type="password" id="pwd" name="password" placeholder="Password">
+          </div>
+            <div class="input-row">
+              <button type="submit">LOGIN</button>
+            </div>
+            <p>No account yet?</p>
+            <div class="input-row">
+              <a href="/register">Register</a>
+            </div>
+            <div class="msg">
+              {{#if message}}
+                <p>{{message}}</p>
+              {{/if}}
+            </div>
+      </div>
+    </form>
+</body>
+</html>

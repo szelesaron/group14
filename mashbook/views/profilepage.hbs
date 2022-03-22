@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Mashbook</title>
+    <link rel="stylesheet" href="/profileStylesheet.css">
+    <link rel="icon" href="/images/favi.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@100;300;600&family=Libre+Baskerville&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <nav>
+      <div class="nav-left">
+        <div class="username">
+          <h1>username</h1>
+        </div>
+      </div>
+      <div class="nav-center">
+        <img src="/images/logograd.PNG" class = "logo" alt="company logo" >
+      </div>
+      <div class="nav-right" >
+        <button onclick="location.href='/settings';" class="icon"><img src="/images/option.PNG" class="icon" alt=""></button>
+        <button onclick="location.href='/newsfeed';" class = "icon"><img src="/images/home.PNG" class="icon" alt=""></button>
+      
+      </div>
+
+
+
+
+
+
+    </nav>
+
+    <div class="container">
+      <div class="profile-bar">
+
+        <div class="main-profile">
+
+
+          <div class="stats-row">
+            <img src="/images/emptyppic.png" alt="profile pic">
+
+            <div>
+              <h1>{{this.content.length}}</h1>
+              <h2>Mashes</h2>
+            </div>
+
+            <div>
+              <h1>189</h1>
+              <h2>Followers</h2>
+            </div>
+
+            <div>
+              <h1>230</h1>
+              <h2>Following</h2>
+            </div>
+
+          </div>
+          <div>
+            <h1>{{this.username}}</h1>
+            <p>I MET A TRAVELLER from an antique land
+    Who said: Two vast and trunkless legs of stone
+    Stand in the desert. Near them on the sand,
+    Half sunk, a shattered visage lies, whose frown
+    And wrinkled lip and sneer of cold command
+    Tell that its sculptor well those passions read
+    Which yet survive, stamped on these lifeless things,
+    The hand that mocked them and the heart that fed.</p>
+          </div>
+
+        </div>
+
+      </div>
+      <div class="main-content">
+        <div class="write-post-container">
+          <div class="user-profile">
+            <img src="/images/emptyppic.png" alt="profile pic">
+            <div>
+              <p>{{this.username}}</p>
+              <small>Public</small>
+            </div>
+          </div>
+          <div class="post-input-container">
+
+            <textarea name="" rows="3" placeholder="What will you create?"></textarea>
+
+          </div>
+
+        </div>
+
+
+        {{#each this.content}}
+        <div class="post-container">
+          <div class="user-profile">
+            <img src="/images/emptyppic.png" alt="profile pic">
+            <div>
+              <p>{{this.userPosted}}</p>
+            </div>
+
+            <div class="post-details">
+              <button onclick="optionsFunc"><img src="/images/option.PNG"  alt=""></button>
+            </div>
+          </div>
+
+
+          <div class="post-imgcont">
+
+            <img src="/{{this.path}}" class="post-image">
+
+            <div class="post-mashes">
+                <img src="/{{this.path}}" class="post-mash" alt="">
+                <img src="/{{this.path}}" class="post-mash" alt="">
+                <img src="/{{this.path}}" class="post-mash" alt="">
+                <img src="/{{this.path}}" class="post-mash" alt="">
+            </div>
+          </div>
+
+          <div class="post-row">
+            <div class="activity-icons">
+              <button onclick="location.href='/like/{{this.contentId}}';"><img src="/images/like.PNG" class="icon" alt=""></button>
+              <button onclick="location.href='/post/{{this.contentId}}';"><img src="/images/comment.PNG" class="icon" alt=""></button>
+              <button onclick="sendFunc"><img src="/images/send.PNG" class="icon" alt=""></button>
+              <button onclick="location.href='/editcontent/{{this.contentId}}';"><img src="/images/paint.PNG" class="right icon" alt=""></button>
+              <button onclick="saveFunc"><img src="/images/save.PNG" class="right icon" alt=""></button>
+            </div>
+          </div>
+            <p class = "likes">{{this.reactions}} likes</p>
+            <p class="description"><span>{{this.userPosted}}</span> {{this.description}}</p>
+            <p class="post-time">{{this.datePosted}}</p>
+
+            <div class="comment-wrapper">
+                    <form method="POST" action="/postComment/{{this.contentId}}" enctype="multipart/form-data" class="comment-wrapper">
+                        <input type="text" name="comment" class="comment-box" placeholder="Add a comment">
+                        <button class="comment-btn">post</button>
+                    </form>
+            </div>
+
+
+
+        </div>
+        {{/each}}
+      
+
+      </div>
+    </div>
+
+    <script src="menuscript.js">
+
+    </script>
+
+  </body>
+</html>

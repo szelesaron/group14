@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Gallery | Mashbook</title>
+  <link rel="stylesheet" href="/galleryStylesheet.css">
+  <link rel="icon" href="/images/favi.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@100;300;600&family=Libre+Baskerville&display=swap"
+    rel="stylesheet">
+
+</head>
+
+<body>
+  <nav class="navbar">
+    <div class="nav-wrapper">
+      <img src="/images/logograd.PNG" class="brand-img" alt="">
+      <input type="text" class="search-box" placeholder="search">
+      <div class="nav-items">
+
+        <button onclick="location.href='/newsfeed';" class="icon"><img src="/images/home.PNG" class="icon"
+            alt=""></button>
+        <button onclick="location.href='/post';" class="icon"><img src="/images/add.PNG" class="icon" alt=""></button>
+        <button onclick="" class="icon"><img src="/images/like.PNG" class="icon" alt=""></button>
+        <button onclick="openNav();" class="icon"><img src="/images/option.PNG" class="icon" alt=""></button>
+        <button onclick="location.href='/profile';" class="icon user-profile"></button>
+
+      </div>
+    </div>
+  </nav>
+
+  <div id="mySidenav" class="sidenav">
+    <b>{{this.username}}</b>
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a href="#">Edit Profile</a>
+    <a href="#">Liked Posts</a>
+    <a href="#">Privacy</a>
+    <a href="#">Security</a>
+    <a href="#">Help</a>
+    <a href="/website/index.html">About</a>
+    <a href="/logout">Log Out</a>
+  </div>
+  <script>
+    /* Set the width of the side navigation to 250px */
+    function openNav() {
+      document.getElementById("mySidenav").style.width = "250px";
+    }
+
+    /* Set the width of the side navigation to 0 */
+    function closeNav() {
+      document.getElementById("mySidenav").style.width = "0";
+    }
+  </script>
+
+  <div class="originalWrap">
+    <div class="original">
+      <img src="/{{this.mashup.path}}" alt="">
+    </div>
+  </div>
+  <div class="post-content">
+    <label>Mashup Title:</label>
+    <p class="title">{{this.mashup.mashupTitle}}</p>
+    <p class="description">{{this.mashup.mashupDescription}} likes</p>
+    <p class="description"><span>{{this.mashup.userPosted}}</span>
+      {{this.mashup.description}}
+    </p>
+    <p class="post-time">{{this.mashup.datePosted}}</p>
+    <a href="/addtomashup/{{this.mashup.mashupId}}">Add to mashup button</a>
+  </div>
+
+  
+
+  <div class="content">
+
+
+    <section id="mashes">
+      
+
+      {{#each content}}
+      <div class="project">
+        <img class="project__image" src="/{{this.path}}" />
+
+
+        <div class="grid__overlay">
+          <h1>{{this.userPosted}}</h1>
+          <h1>{{this.reactions}}</h1>
+          <button class="viewbutton">View Profile</button>
+          <button onclick="location.href='/reportcontent/{{this.contentId}}';">Report</button>
+          
+          <button onclick="location.href='/like/{{this.contentId}}';"><img src="/images/like.PNG" class="icon"alt=""></button>
+          <form method="POST" action="/postComment/{{this.contentId}}" enctype="multipart/form-data" class="comment-wrapper">
+                        <input type="text" name="comment" class="comment-box" placeholder="Add a comment">
+                        <button class="comment-btn">post</button>
+                    </form>
+        </div>
+      </div>
+      {{/each}}
+
+
+      <div class="overlay">
+
+      </div>
+    </section>
+  </div>
+</body>
+
+</html>

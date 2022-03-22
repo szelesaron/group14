@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit | Mashbook</title>
+  <link rel="stylesheet" href="/newsfeed_style.css">
+  <link rel="icon" href="/images/favi.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@100;300;600&family=Libre+Baskerville&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+  <nav class="navbar">
+        <div class="nav-wrapper">
+            <img src="/images/logograd.PNG" class="brand-img" alt="">
+            <input type="text" class="search-box" placeholder="search">
+            <div class="nav-items">
+
+                <button onclick="location.href='/newsfeed';" class = "icon"><img src="/images/home.PNG" class="icon" alt=""></button>
+
+                <button onclick="location.href='/post';" class="icon"><img src="/images/add.PNG" class="icon" alt=""></button>
+
+                <button onclick="" class = "icon"><img src="/images/like.PNG" class="icon" alt=""></button>
+
+                <button onclick="location.href='/settings';" class="icon"><img src="/images/option.PNG" class="icon" alt=""></button>
+
+                <button onclick="location.href='/profile';" class="icon user-profile"></button>
+
+            </div>
+        </div>
+  </nav>
+
+  {{#each content}}
+
+
+
+  <section class="main">
+
+    <div class="wrapper">
+
+      <div class="edit-post">
+        <div class="info">
+          <div class="user">
+            <div class="profile-pic"><img src="/images/profile-pic.png" alt=""></div>
+            <p class="username">{{this.userPosted}}</p>
+          </div>
+
+          <img src="/images/option.PNG" class="options" alt="">
+        </div>
+        <div class="edit-imgcont">
+          <img src="/{{this.path}}" class="edit-image" alt="">
+        </div>
+        <div class="edit-form">
+          <form method="POST" action="/editcontentpost/{{this.contentId}}" enctype="multipart/form-data" required>
+            <input type="file" name="myFile" />
+            <input type="submit" value="upload" />
+          </form>
+        </div>
+        <div class="post-content">
+          <p class="description"><span>{{this.userPosted}}</span>
+          {{this.description}}
+          </p>
+          <p class="post-time">{{this.datePosted}}</p>
+        </div>
+        <div class="comment-wrapper">
+            <a href="/deletecontent/{{this.contentId}}" type="button" class="btn btn-light btn-small"><i
+                class="bi bi-pencil"></i>
+              delete</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  </form>
+  {{/each}}
+  {{#if message}}
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>{{message}}</strong>
+
+  </div>
+  {{/if}}
+
+</body>
+
+</html>

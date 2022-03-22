@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Newsfeed | Mashbook</title>
+    <link rel="stylesheet" href="/newsfeed_style.css">
+    <link rel="icon" href="/images/favi.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@100;300;600&family=Libre+Baskerville&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="nav-wrapper">
+            <img src="/images/logograd.PNG" class="brand-img" alt="">
+            <input type="text" class="search-box" placeholder="search">
+            <div class="nav-items">
+
+                <button onclick="location.href='/newsfeed';" class = "icon"><img src="/images/home.PNG" class="icon" alt=""></button>
+                <button onclick="location.href='/post';" class="icon"><img src="/images/add.PNG" class="icon" alt=""></button>
+                <button onclick="" class = "icon"><img src="/images/like.PNG" class="icon" alt=""></button>
+                <button onclick="openNav();" class="icon"><img src="/images/option.PNG" class="icon" alt=""></button>
+                <button onclick="location.href='/profile';" class="icon user-profile"></button>
+
+            </div>
+        </div>
+    </nav>
+
+    <div id="mySidenav" class="sidenav">
+        <b>{{this.username}}</b>
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="#">Edit Profile</a>
+        <a href="#">Liked Posts</a>
+        <a href="#">Privacy</a>
+        <a href="#">Security</a>
+        <a href="#">Help</a>
+        <a href="/website/index.html">About</a>
+        <a href="/logout">Log Out</a>
+    </div>
+    <script>
+        /* Set the width of the side navigation to 250px */
+        function openNav() {
+        document.getElementById("mySidenav").style.width = "250px";
+        }
+
+        /* Set the width of the side navigation to 0 */
+        function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+        }
+    </script>
+
+    <div class="foryou-weekly">
+        <button onclick=""><b class="foryou">For You</b></button>
+        <button onclick=""><b class="foryou">|</b></button>
+        <button onclick="location.href='/mashup';"><b class="weekly">Weekly</b></button>
+    </div>
+
+    
+    <section class="main">
+        <div class="wrapper">
+            <div class="post">
+                <div class="info">
+                    <div class="user">
+                        <div class="profile-pic"><img src="/images/profile-pic.png" alt=""></div>
+                        <p class="username">{{this.content.userPosted}}</p>
+                    </div>
+                    <div class="dropdown" style="float: right;">
+                        <button class="dropbtn"><img src="/images/option.PNG" class="options" alt=""></button>
+                        <div class="dropdown-content">
+                            <a href="/editcontent/{{this.contentId}}">Edit Post</a>
+                            <a href="/reportcontent/{{this.contentId}}">Report</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="post-imgcont">
+                    <img src="/{{this.content.path}}" class="post-image" alt="">
+                    <div class="post-mashes">
+                        <img src="/{{this.content.path}}" class="post-mash" alt="">
+                        <img src="/{{this.content.path}}" class="post-mash" alt="">
+                        <img src="/{{this.content.path}}" class="post-mash" alt="">
+                        <img src="/{{this.content.path}}" class="post-mash" alt="">
+                    </div>
+                </div>
+                <div class="post-content">
+                    <div class="reaction-wrapper">
+
+                        <button onclick="location.href='/like/{{this.content.contentId}}';"><img src="/images/like.PNG" class="icon" alt=""></button>
+                        <button onclick="location.href='/post/{{this.content.contentId}}';"><img src="/images/comment.PNG" class="icon" alt=""></button>
+                        <button><img src="/images/send.PNG" class="icon" alt=""></button>
+                        <button><img src="/images/paint.PNG" class="right icon" alt=""></button>
+                        <button><img src="/images/save.PNG" class="right icon" alt=""></button>
+                    </div>
+                    <p class="likes">{{this.content.reactions}} likes</p>
+                    <p class="description"><span>{{this.content.userPosted}}</span>
+                        {{this.content.description}}
+                    </p>
+                    <p class="post-time">{{this.content.datePosted}}</p>
+ 
+
+                        {{#each comments}}
+                            {{this.userCommented}}:{{this.comment}} - {{this.commentDate}}<br>
+                        {{/each}}
+
+                </div>
+                <div class="comment-wrapper">
+                    
+                    <form method="POST" action="/postComment/{{this.content.contentId}}" enctype="multipart/form-data" class="comment-wrapper">
+                        <input type="text" name="comment" class="comment-box" placeholder="Add a comment">
+                        <button class="comment-btn">post</button>
+                    </form>
+
+
+         
+                </div>
+     
+            </div>
+        </div>
+    </section>
+
+</body>
+
+</html>
