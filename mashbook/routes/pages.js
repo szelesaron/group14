@@ -515,22 +515,33 @@ router.post('/addtomashup/:id', (req, res) => {
                         .toFile('./public/uploads/mashup' + date+ "-" + file.name, (err, info) => {
                             //if error notify user about file being too big
                             if (err){
-                                console.log("File needs to be smaller.")
+                                return res.redirect('/errorpage');
+                            }
+                            
+                            else
+                            {
+                                //insert into content table
+                                result = db.query('INSERT INTO content (mashupId, userPosted, datePosted, description, path) VALUES (?, ?, ?, ?, ?)', [mashupId, decoded.username , currentDate, description, "uploads/mashup" + date+ "-" + file.name], (err, result) => {
+                                    if (err) throw err;
+
+                                    return res.redirect('../gallery/' + mashupId);
+                                });
                             }
                         });
 
                 });
 
-                //insert into content table
-                result = db.query('INSERT INTO content (mashupId, userPosted, datePosted, description, path) VALUES (?, ?, ?, ?, ?)', [mashupId, decoded.username , currentDate, description, "uploads/mashup" + date+ "-" + file.name], (err, result) => {
-                    if (err) throw err;
 
-                    return res.redirect('../gallery/' + mashupId);
-                });
 
             }
         });
     });
+});
+
+//error page
+router.get('/errorpage', (req, res) => {
+    res.render('errorpage', {
+        message: 'File size too large'});
 });
 
 //edit content page
