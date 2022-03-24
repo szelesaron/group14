@@ -501,6 +501,17 @@ router.post('/addtomashup/:id', (req, res) => {
                     let secondaryPicture = path
                     let compositionType = req.body.sharpType
 
+                    if(compositionType == "none")
+                    {
+                        result = db.query('INSERT INTO content (mashupId, userPosted, datePosted, description, path) VALUES (?, ?, ?, ?, ?)', [req.params.id, decoded.username , date, description, "uploads/" + secondaryPicture.split("/")[3]], (err, result) => {
+                            if (err) throw err;
+                            return res.redirect('../gallery/' + req.params.id);
+                        });
+                    }
+                    else
+                    {
+
+                    
                     
                     //create image composition with sharp
                     sharp("./public/"+masterPicture)
@@ -524,6 +535,7 @@ router.post('/addtomashup/:id', (req, res) => {
                                 });
                             }
                         });
+                    }
 
                 });
 
