@@ -102,10 +102,16 @@ exports.login = (req, res) => {
             let isPasswordMatch = await bcrypt.compare(password, user.password);
             if (isPasswordMatch)
             {
-
-                let token = jwt.sign({ username: username}, process.env.JWT_SECRET, { expiresIn: "1h" });
-                res.cookie('jwt', token, { httpOnly: true });
-                res.redirect('/newsfeed');
+                // checking if against the db if user is admin
+                if(user.isAdmin == "1"){
+                    let token = jwt.sign({ username: username}, process.env.JWT_SECRET, { expiresIn: "1h" });
+                    res.cookie('jwt', token, { httpOnly: true });
+                    res.redirect('/admindashboard');
+                }else{
+                    let token = jwt.sign({ username: username}, process.env.JWT_SECRET, { expiresIn: "1h" });
+                    res.cookie('jwt', token, { httpOnly: true });
+                    res.redirect('/newsfeed');
+                }
             }
             else
             {
