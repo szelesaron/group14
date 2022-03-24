@@ -492,11 +492,6 @@ router.post('/addtomashup/:id', (req, res) => {
                 return res.redirect('/');
             }
             else {
-                let curDate = new Date();
-                let year = curDate.getFullYear();
-                let month = curDate.getMonth() + 1;
-                let day = curDate.getDate();
-                let currentDate = year + "/" + month + "/" + day;
 
                 //get master picture from id
                 result = db.query('SELECT * FROM mashups WHERE mashupId = ?', [req.params.id], (err, result) => {
@@ -512,16 +507,17 @@ router.post('/addtomashup/:id', (req, res) => {
                         .composite([
                             { input: secondaryPicture, blend: compositionType , opacity: 0.5 }
                         ])
-                        .toFile('./public/uploads/mashup' + date+ "-" + file.name, (err, info) => {
+                        .toFile('./public/uploads/mashup' + date + "-" + file.name, (err, info) => {
                             //if error notify user about file being too big
                             if (err){
+                                console.log(err);
                                 return res.redirect('/errorpage');
                             }
                             
                             else
                             {
                                 //insert into content table
-                                result = db.query('INSERT INTO content (mashupId, userPosted, datePosted, description, path) VALUES (?, ?, ?, ?, ?)', [mashupId, decoded.username , currentDate, description, "uploads/mashup" + date+ "-" + file.name], (err, result) => {
+                                result = db.query('INSERT INTO content (mashupId, userPosted, datePosted, description, path) VALUES (?, ?, ?, ?, ?)', [mashupId, decoded.username , date, description, "uploads/mashup" + date+ "-" + file.name], (err, result) => {
                                     if (err) throw err;
 
                                     return res.redirect('../gallery/' + mashupId);
