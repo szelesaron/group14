@@ -501,13 +501,19 @@ router.post('/addtomashup/:id', (req, res) => {
                 result = db.query('SELECT * FROM mashups WHERE mashupId = ?', [req.params.id], (err, result) => {
                     if (err) throw err;
 
+                    let curDate2 = new Date();
+                    let year2 = curDate2.getFullYear();
+                    let month2 = curDate2.getMonth() + 1;
+                    let day2 = curDate2.getDate();
+                    let currentDate2 = year2 + "/" + month2 + "/" + day2;
                     let masterPicture = result[0].path;
                     let secondaryPicture = path
                     let compositionType = req.body.sharpType
+                 
 
                     if(compositionType == "none")
                     {
-                        result = db.query('INSERT INTO content (mashupId, userPosted, datePosted, description, path) VALUES (?, ?, ?, ?, ?)', [req.params.id, decoded.username , date, description, "uploads/" + secondaryPicture.split("/")[3]], (err, result) => {
+                        result = db.query('INSERT INTO content (mashupId, userPosted, datePosted, description, path) VALUES (?, ?, ?, ?, ?)', [req.params.id, decoded.username , currentDate2, description, "uploads/" + secondaryPicture.split("/")[3]], (err, result) => {
                             if (err) throw err;
                             return res.redirect('../gallery/' + req.params.id);
                         });
