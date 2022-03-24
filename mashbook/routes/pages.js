@@ -107,7 +107,7 @@ router.get('/profile', (req, res) => {
             res.redirect('/');
         } else {
             //render newsfeed with content from db
-            result = db.query("SELECT * FROM content WHERE userposted = ? AND contentStatus = 'Active' ORDER BY contentId DESC", [decoded.username], (err, result) => {
+            result = db.query("SELECT contentId, userPosted, path, datePosted FROM content WHERE userPosted = ? AND contentStatus = 'Active' UNION SELECT mashupId, userPosted, path, datePosted FROM mashups WHERE userPosted = ? AND mashupStatus = 'Active' ORDER BY `datePosted` DESC;", [decoded.username, decoded.username], (err, result) => {
                 if (err) throw err;
 
           
