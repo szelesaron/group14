@@ -795,21 +795,60 @@ router.post('/contentreported/:id', (req, res) => {
 // Moderation tools pages
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//Admin dashboard page - flagged
+//Admin dashboard page - flagged mashups
 router.get('/admindashboard', (req, res) => {
     //redirect only if user is logged in
     jwt.verify(req.cookies.jwt, process.env.JWT_SECRET, (err, decoded) => {
         if (err) {
             res.redirect('/');
         } else {
-
-
-            // mushup sql needs to go here
-            result = db.query('SELECT * FROM users', (err, result) => {
+             // mushup sql needs to go here
+            result = db.query('SELECT * FROM mashups ORDER BY mashupStatus DESC, mashupStatus DESC', (err, result) => {
 
                 if (err) throw err;
                 res.render('admindashboard', { content: result })
             });
+        }
+    });
+});
+
+//Admin dashboard page - edit mashup get
+router.get('/admineditmashup/:id', (req, res) => {
+    //redirect only if user is logged in
+    jwt.verify(req.cookies.jwt, process.env.JWT_SECRET, (err, decoded) => {
+        if (err) {
+            res.redirect('/');
+        } else {
+
+            //render mashups from db
+            result = db.query('SELECT * FROM mashups WHERE mashupId = ?', [req.params.id], (err, result) => {
+                if (err) throw err;
+                res.render('admineditmashup', { content: result })
+            });
+        }
+    });
+});
+//Admin dashboard page - edit mashup, post form
+router.post('/admineditmashup/:id', (req, res) => {
+    const { mashupStatus, flagAnswer } = req.body;
+    //get logged in username
+    jwt.verify(req.cookies.jwt, process.env.JWT_SECRET, (err, decoded) => {
+        if (err) {
+            res.redirect('/');
+        } else {
+
+            //render mashup from db
+            result = db.query('SELECT * FROM mashups WHERE mashupId = ?', [req.params.id], (err, result) => {
+                if (err) throw err;
+                res.render('admineditmashup', { content: result })
+                                   
+            
+            //Update mashup
+            result = db.query('UPDATE mashups SET mashupStatus = ?, mashupFlagged = ? WHERE mashupId = ?', [mashupStatus, flagAnswer, req.params.id]);
+
+            res.redirect('../admindashboard');
+            });
+
         }
     });
 });
@@ -821,7 +860,6 @@ router.get('/adminusers', (req, res) => {
         if (err) {
             res.redirect('/');
         } else {
-
             //render newsfeed with content from db
             result = db.query('SELECT * FROM users ORDER BY userStatus DESC', (err, result) => {
 
@@ -902,7 +940,7 @@ router.get('/admineditcontent/:id', (req, res) => {
     });
 });
 
-//Admin dashboard page - edit users, post form
+//Admin dashboard page - edit content, post form
 router.post('/admineditcontent/:id', (req, res) => {
     const { contentStatus, flagAnswer } = req.body;
     //get logged in username
@@ -915,16 +953,12 @@ router.post('/admineditcontent/:id', (req, res) => {
             result = db.query('SELECT * FROM content WHERE contentID = ?', [req.params.id], (err, result) => {
                 if (err) throw err;
                 
-                
                 res.render('admineditcontent', { content: result })
-                                   
             
             //Update content
             result = db.query('UPDATE content SET contentStatus = ?, contentFlagged = ? WHERE contentId = ?', [contentStatus, flagAnswer, req.params.id]);
 
             res.redirect('../admincontent');
-              
-
 
         });
 

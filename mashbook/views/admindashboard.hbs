@@ -50,9 +50,11 @@
         <th scope="col">Mashup Id</th>
         <th scope="col">User Posted</th>
         <th scope="col">Date Posted</th>
+        <th scope="col">Mashup Title</th>
         <th scope="col">Path</th>
         <th scope="col">Reactions</th>
         <th scope="col">Mashup Status</th>
+        <th scope="col">Mashup Flagged</th>
       </tr>
     </thead>
     <tbody>
@@ -60,19 +62,17 @@
       <div class="view-user p-5">
         {{#each content}}
         <tr>
-          <td>{{this.contentId}}</td>
+          <td>{{this.mashupId}}</td>
           <td>{{this.userPosted}}</td>
           <td>{{this.datePosted}}</td>
+          <td>{{this.mashupTitle}}</td>
           <td>{{this.path}}</td>
           <td>{{this.reactions}}</td>
-          <td>{{this.contentStatus}}</td>
+          <td>{{this.mashupStatus}}</td>
+          <td>{{this.mashupFlagged}}</td>
           <td class="text-end">
-            <a href="/viewuser/{{this.id}}" type="button" class="btn btn-light btn-small"><i class="bi bi-eye"></i>
+            <a href="/admineditmashup/{{this.mashupId}}" type="button" class="btn btn-light btn-small"><i class="bi bi-eye"></i>
               View</a>
-            <a href="/edituser/{{this.id}}" type="button" class="btn btn-light btn-small"><i class="bi bi-pencil"></i>
-              Edit</a>
-            <a href="/{{this.id}}" type="button" class="btn btn-light btn-small"><i class="bi bi-person-x"></i>
-              Delete</a>
           </td>
         </tr>
     </tbody>
