@@ -23,13 +23,36 @@
 
                 <button onclick="location.href='/post';" class="icon"><img src="/images/add.PNG" class="icon" alt=""></button>
 
-                <button onclick="location.href='/settings';" class="icon"><img src="/images/option.PNG" class="icon" alt=""></button>
+                <button onclick="openNav()" class="icon"><img src="/images/option.PNG" class="icon" alt=""></button>
 
                 <button onclick="location.href='/profile';" class="icon user-profile"></button>
 
             </div>
         </div>
   </nav>
+
+   <div id="mySidenav" class="sidenav">
+    <b>{{this.username}}</b>
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a href="#">Edit Profile</a>
+    <a href="#">Liked Posts</a>
+    <a href="#">Privacy</a>
+    <a href="#">Security</a>
+    <a href="#">Help</a>
+    <a href="/website/index.html">About</a>
+    <a href="/logout">Log Out</a>
+  </div>
+  <script>
+    /* Set the width of the side navigation to 250px */
+    function openNav() {
+      document.getElementById("mySidenav").style.width = "250px";
+    }
+
+    /* Set the width of the side navigation to 0 */
+    function closeNav() {
+      document.getElementById("mySidenav").style.width = "0";
+    }
+  </script>
 
   {{#each content}}
 
