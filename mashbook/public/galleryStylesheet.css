@@ -131,7 +131,6 @@ min-height: 100%;
 
 .project__image {
     position: absolute;
-    opacity: 0.9;
     border: 1px solid #dbdbdb;
     border-radius: 10px;
     max-width: 100%;
@@ -141,25 +140,6 @@ min-height: 100%;
     display: block;
 
   }
-  /*p {
-    text-align: center;
-    width: 100%;
-  }*/
-  .grid__title {
-    position: absolute;
-    width: 100%;
-    text-align: center;
-    white-space: nowrap;
-    bottom: 0;
-    font-weight: 100;
-    font-size: 0.8em;
-    z-index: 3;
-    text-transform: uppercase;
-    color: #474545;
-    letter-spacing: 2px;
-  }
-
-
 
 .project:hover .grid__overlay {
   transform: translateY(0%);

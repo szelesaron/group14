@@ -42,21 +42,20 @@
         <div class="upload-wrapper">
             <div class="upload">
                 <form method="POST" action="/upload" enctype="multipart/form-data" class="upload-form">
+                <p class="upload-title">Upload File:</p>
                         <input type="file" name="myFile" required />
                         
-             
+  <p class="upload-title">Mashup Title:</p>
   <div class="col-6">
     <div class="form-floating mb-3">
-    <label for="floatingInput">Mashup Title</label>
-      <input type="text" name="mashupTitle" placeholder="Mashup Title" required>
-      
+      <input type="text" name="mashupTitle" placeholder="Enter Title" required>   
     </div>
   </div>
-   <div class="col-6">
+
+  <p class="upload-title">Mashup Description:</p>
+  <div class="col-6">
     <div class="form-floating mb-3">
-    <label for="floatingInput">Mashup Description</label>
-      <input type="text" name="mashupDescription" placeholder="Mashup Description" required>
-      
+      <input type="text" name="mashupDescription" placeholder="Enter Description" required> 
     </div>
   </div>
   
