@@ -130,6 +130,26 @@ router.get('/profile', (req, res) => {
 });
 
 
+//view another users profile
+router.get('/profile/:username', (req, res) => {
+    //redirect only if user is logged in
+    jwt.verify(req.cookies.jwt, process.env.JWT_SECRET, (err, decoded) => {
+        if (err) {
+            res.redirect('/');
+        } else {
+            //render profile page with content from db
+            result = db.query("SELECT contentId, userPosted, path, datePosted FROM content WHERE userPosted = ? AND contentStatus = 'Active' UNION SELECT mashupId, userPosted, path, datePosted FROM mashups WHERE userPosted = ? AND mashupStatus = 'Active' ORDER BY `datePosted` DESC;", [req.params.username, req.params.username], (err, result) => {
+                if (err) throw err;
+
+
+                res.render('profilepage', { content: result, username: req.params.username });
+            });
+        }
+    });
+});
+
+
+
 //settings page
 router.get('/settings', (req, res) => {
     //redirect only if user is logged in
