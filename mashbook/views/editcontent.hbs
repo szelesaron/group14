@@ -52,17 +52,7 @@
           <img src="/{{this.path}}" class="edit-image" alt="">
         </div>
         <div class="edit-form">
-          <form method="POST" action="/editcontentpost/{{this.contentId}}" enctype="multipart/form-data" required>
-            <input type="file" name="myFile" />
-            <input type="submit" value="upload" />
-          </form>
-        </div>
-        <div class="post-content">
-          <p class="description"><span>{{this.userPosted}}</span>
-          {{this.description}}
-          </p>
-          <p class="post-time">{{this.datePosted}}</p>
-        </div>
+         
         <div class="comment-wrapper">
             <a href="/deletecontent/{{this.contentId}}" type="button" class="btn btn-light btn-small"><i
                 class="bi bi-pencil"></i>
@@ -71,7 +61,7 @@
       </div>
     </div>
   </section>
-  </form>
+  
   {{/each}}
   {{#if message}}
   <div class="alert alert-success alert-dismissible fade show" role="alert">
