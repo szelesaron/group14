@@ -209,7 +209,7 @@ min-height: 100%;
   font-weight: bold;
   margin-bottom: auto;
 }
-//project popup overlay
+/*project popup overlay*/
 
 .overlay {
   position: fixed;
@@ -224,7 +224,7 @@ min-height: 100%;
 .overlay.open {
   display: grid;
   align-items: center;
-  justify-content: : center;
+  justify-content: center;
 }
 
 .overlay__inner {
