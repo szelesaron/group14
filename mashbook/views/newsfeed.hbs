@@ -92,17 +92,11 @@
                         <button onclick="location.href='/like/{{this.contentId}}';"><img src="/images/like.PNG" class="icon" alt=""></button>
                         <button onclick="location.href='/post/{{this.contentId}}';"><img src="/images/comment.PNG" class="icon" alt=""></button>
                         <button><img src="/images/send.PNG" class="icon" alt=""></button>
-                        <button><img src="/images/paint.PNG" class="right icon" alt=""></button>
-                        <button><img src="/images/save.PNG" class="right icon" alt=""></button>
+                        <button onclick="location.href=/addtomashup/{{this.mashup.mashupId}}"><img src="/images/paint.PNG" class="right icon" alt=""></button>
                     </div>
-                    <row>
-                    <label>Mashup Title:</label>
                     <p class="title">{{this.mashupTitle}}</p>
-                    </row>
                     <p class="likes">{{this.reactions}} likes</p>
-                    <p class="description"><span>{{this.userPosted}}</span>
-                        {{this.description}}
-                    </p>
+                    <p class="description">{{this.userPosted}}: {{this.mashupDescription}}</p>
                     <p class="post-time">{{this.datePosted}}</p>
  
                

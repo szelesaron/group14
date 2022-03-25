@@ -157,7 +157,7 @@ button{
 .post{
     width: 100%;
     height: auto;
-    background: #fff;
+    background: #ffffff;
     border: 1px solid #dfdfdf;
     margin-top: 40px;
     align-self: left;
@@ -249,13 +249,11 @@ button{
 }
 
 .description{
-    margin: 10px 0;
     font-size: 16px;
     line-height: 20px;
 }
 
 .description span{
-    font-weight: bold;
     margin-right: 10px;
 }
 
@@ -489,6 +487,21 @@ button{
 
 /* Change the background color of the dropdown button when the dropdown content is shown */
 .dropdown:hover .dropbtn {background-color: #ffffff;}
+
+.title{
+    font-weight: bold;
+    font-size: larger;
+}
+
+.likes{
+    font-weight: bold;
+    color:#8b8b8b;
+}
+
+.description{
+    font-weight: normal;
+    color:#8b8b8b;
+}
 
 @media (max-width: 1300px){
     .search-box{
