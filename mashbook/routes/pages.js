@@ -76,7 +76,7 @@ router.get('/newsfeed', (req, res) => {
 });
 
 //mashup partial page for 4 mashup images
-router.get('/partials/fourimages', (req, res) => {
+router.get('/fourimages', (req, res) => {
     //redirect only if user is logged in
     jwt.verify(req.cookies.jwt, process.env.JWT_SECRET, (err, decoded) => {
         if (err) {
@@ -102,7 +102,7 @@ router.get('/mashup', (req, res) => {
             res.redirect('/');
         } else {
             //render posts from database
-            db.query("SELECT * FROM mashups INNER JOIN users ON mashups.userPosted = users.username AND mashups.userPosted = 'MashbookTeam' ORDER BY mashupId DESC;", (err, result) => {
+            db.query("SELECT * FROM mashups WHERE userPosted = 'MashbookTeam' ORDER BY mashupId DESC;", (err, result) => {
                 if (err) throw err;
                 res.render('mashup', { content: result, username: decoded.username });
                 
