@@ -76,19 +76,12 @@ router.get('/newsfeed', (req, res) => {
 });
 
 //mashup partial page for 4 mashup images
-router.get('/fourimages', (req, res) => {
-    //redirect only if user is logged in
+router.get('/partials/fourimages', (req, res) => {
     jwt.verify(req.cookies.jwt, process.env.JWT_SECRET, (err, decoded) => {
         if (err) {
             res.redirect('/');
         } else {
-            //render posts from database
-            db.query("SELECT * FROM mashups mashups.userPosted != 'MashbookTeam' ORDER BY mashupId DESC;", (err, result) => {
-                if (err) throw err;
-                res.render('fourimages', { content: result, username: decoded.username });
-                
-            });
-
+            res.render('fourimages');
         }
     });
 });
