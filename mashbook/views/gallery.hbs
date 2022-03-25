@@ -60,10 +60,8 @@
   </div>
   <div class="post-content">
     <p class="title">{{this.mashup.mashupTitle}}</p>
-    <p class="description">{{this.mashup.mashupDescription}} likes</p>
-    <p class="description"><span>{{this.mashup.userPosted}}</span>
-      {{this.mashup.description}}
-    </p>
+    <p class="likes">{{this.mashup.reactions}} likes</p>
+    <p class="description">{{this.mashup.userPosted}}: {{this.mashup.mashupDescription}}</p>
     <p class="post-time">{{this.mashup.datePosted}}</p>
     <a href="/addtomashup/{{this.mashup.mashupId}}">Add to mashup button</a>
   </div>
