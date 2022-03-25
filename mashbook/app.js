@@ -78,6 +78,7 @@ db.query(sql_insert, [values], (err, res) => {
 var sql_insert_mashup = "INSERT INTO mashups (mashupId, userPosted, datePosted, mashupTitle, mashupDescription, reactions, path, mashupStatus, mashupFlagged) VALUES ?";
 var values2 = [
     [1, 'test', '2022-01-12','Mona Collaboration ', 'Who can come up with the best mona upgrade?', 0, 'uploads/mona.jpg', 'Active', 0],
+    [2, 'MashbookTeam', '2022-01-12','Mashup Our Logo', 'Can you improve our Mashbook Logo?', 0, 'images/favi.png', 'Active', 0],
     
 ];
 
