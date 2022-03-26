@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add To Mashup | Mashbook</title>
+  <link rel="stylesheet" href="/newsfeed_style.css">
+  <link rel="icon" href="/images/favi.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@100;300;600&family=Libre+Baskerville&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+  <nav class="navbar">
+        <div class="nav-wrapper">
+            <img src="/images/logograd.PNG" class="brand-img" alt="">
+            <div class="nav-items">
+
+                <button onclick="location.href='/newsfeed';" class = "icon"><img src="/images/home.PNG" class="icon" alt=""></button>
+
+                <button onclick="location.href='/post';" class="icon"><img src="/images/add.PNG" class="icon" alt=""></button>
+
+                <button onclick="openNav()" class="icon"><img src="/images/option.PNG" class="icon" alt=""></button>
+
+                <button onclick="location.href='/profile';" class="icon user-profile"></button>
+
+            </div>
+        </div>
+  </nav>
+
+   <div id="mySidenav" class="sidenav">
+    <b>{{this.username}}</b>
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a href="#">Edit Profile</a>
+    <a href="#">Liked Posts</a>
+    <a href="#">Privacy</a>
+    <a href="#">Security</a>
+    <a href="#">Help</a>
+    <a href="/website/index.html">About</a>
+    <a href="/logout">Log Out</a>
+  </div>
+  <script>
+    /* Set the width of the side navigation to 250px */
+    function openNav() {
+      document.getElementById("mySidenav").style.width = "250px";
+    }
+
+    /* Set the width of the side navigation to 0 */
+    function closeNav() {
+      document.getElementById("mySidenav").style.width = "0";
+    }
+  </script>
+
+  {{#each content}}
+
+
+
+  <section class="main">
+
+    <div class="wrapper">
+
+      <div class="edit-post">
+        <div class="info">
+          <div class="user">
+            <div class="profile-pic"><img src="/images/profile-pic.png" alt=""></div>
+            <p class="username">{{this.userPosted}}</p>
+          </div>
+
+          <img src="/images/option.PNG" class="options" alt="">
+        </div>
+        <div class="edit-imgcont">
+          <img src="/{{this.path}}" class="edit-image" alt="">
+        </div>
+        <div class="edit-form">
+          <form method="POST" action="/addtomashup/{{this.mashupId}}" enctype="multipart/form-data" required>
+            <input type="file" name="myFile" required>
+            <select name="sharpType" id="sharpType">
+                <option value="none">None</option>
+                <option value="overlay">Overlay</option>
+                <option value="difference">Difference</option>
+                <option value="clear">Clear</option>
+                <option value="source">Source</option>
+                <option value="over">Over</option>
+                <option value="in">In</option>
+                <option value="out">Out</option>
+                <option value="atop">Atop</option>
+                <option value="dest">Dest</option>
+                <option value="dest-over">Dest-over</option>
+                <option value="dest-in">Dest-in</option>
+                <option value="dest-out">Dest-out</option>
+                <option value="xor">xor</option>
+                <option value="add">Add</option>
+                <option value="saturate">Saturate</option>
+                <option value="multiply">Multiply</option>
+                <option value="screen">Screen</option>
+                <option value="darken">Darken</option>
+                <option value="lighten">Lighten</option>
+                <option value="colour-dodge">Colour-dodge</option>
+                <option value="colour-burn">Colour-burn</option>
+                <option value="hard-light">Hard-light</option>
+                <option value="soft-light">Soft-light</option>
+                <option value="exclusion">Exclusion</option>
+            <input type="text" name="description" placeholder="Caption" required>
+            <input type="text" id="contentId" name="contentId" value="{{this.contentId}}" hidden checked>
+            <input type="submit" value="upload" />
+          </form>
+        </div>
+        <div class="post-content">
+          <p class="description"><span>{{this.userPosted}}</span>
+          </p>
+          <p class="post-time">{{this.datePosted}}</p>
+        </div>
+          <p class="mashup-title">{{this.mashupTitle}}
+          </p>
+      
+      </div>
+    </div>
+  </section>
+  </form>
+  {{/each}}
+           {{#if message}}
+                <p>{{message}}</p>
+              {{/if}}
+
+</body>
+
+</html>

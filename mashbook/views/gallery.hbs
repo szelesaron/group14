@@ -82,9 +82,9 @@
         <div class="grid__overlay">
           <h1>{{this.userPosted}}</h1>
           <h1>{{this.reactions}} likes</h1>
+          <button onclick="location.href='/mashit/{{this.contentId}}';" style="font-weight : bold ;">Mash It!</button>
           <button onclick="location.href='/profile/{{this.userPosted}}';">View Profile</button>
           <button onclick="location.href='/reportcontent/{{this.contentId}}';">Report</button>
-          
           <button onclick="location.href='/like/{{this.contentId}}';"><img src="/images/like.PNG" class="icon"alt=""></button>
           <form method="POST" action="/postComment/{{this.contentId}}" enctype="multipart/form-data" class="comment-wrapper">
                         <input type="text" name="comment" class="comment-box" placeholder="Add a comment">
