@@ -547,7 +547,7 @@ router.post('/mashit/:id', (req, res) => {
             else {
 
                 //get master picture from id
-                result = db.query('SELECT * FROM content WHERE contentId = ?', contentId, (err, result) => {
+                result = db.query('SELECT * FROM content WHERE contentId = ?', req.params.id, (err, result) => {
                     if (err) throw err;
 
                     let curDate3 = new Date();
