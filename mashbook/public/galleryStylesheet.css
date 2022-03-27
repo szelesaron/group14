@@ -5,10 +5,35 @@
   font-family: "Barlow Condensed", sans-serif;
 }
 
+:root{
+  --body-color:#f2f2f2;
+  --nav-color:#ffffff;
+  --sidenav-color:#ffffff;
+  --post-color:#ffffff;
+  --post-maker-text:#000;
+  --post-title-text:#000;
+  --post-stamp-text:rgba(0, 0, 0, 0.5);
+  --drop-down-color:#ffffff;
+  --drop-down-text:#000;
+}
+
+.dark-theme{
+  --body-color:#374045;
+  --nav-color:#4B5D67;
+  --sidenav-color:#4B5D67;
+  --post-color:#4B5D67;
+  --post-maker-text:#8b8b8b;
+  --post-title-text:#8b8b8b;
+  --post-stamp-text:#8b8b8b;
+  --drop-down-color:#4B5D67;
+  --drop-down-text:#8b8b8b;
+}
+
 body {
   margin: 0;
   padding: 0;
-  background: #f2f2f2;
+  background: var(--body-color);
+  transition: background 0.3s;
 }
 
 button {
@@ -21,7 +46,7 @@ button {
     left: 0;
     width: 100%;
     height: 50px;
-    background: #ffffff;
+    background: var(--nav-color);
     border-bottom: 1px solid #dbdbdb;
     display: flex;
     justify-content: center;
@@ -265,7 +290,7 @@ justify-content: center;
     z-index: 1; /* Stay on top */
     top: 0; /* Stay at the top */
     right: 0;
-    background-color: rgb(255, 255, 255); /* Black*/
+    background-color: var(--sidenav-color); /* Black*/
     overflow-x: hidden; /* Disable horizontal scroll */
     padding-top: 60px; /* Place content 60px from the top */
     transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */

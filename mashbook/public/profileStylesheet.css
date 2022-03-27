@@ -5,14 +5,39 @@
 
 }
 
+:root{
+  --body-color:#f2f2f2;
+  --nav-color:#ffffff;
+  --sidenav-color:#ffffff;
+  --post-color:#ffffff;
+  --post-maker-text:#000;
+  --post-title-text:#000;
+  --post-stamp-text:rgba(0, 0, 0, 0.5);
+  --drop-down-color:#ffffff;
+  --drop-down-text:#000;
+}
+
+.dark-theme{
+  --body-color:#374045;
+  --nav-color:#4B5D67;
+  --sidenav-color:#4B5D67;
+  --post-color:#4B5D67;
+  --post-maker-text:#8b8b8b;
+  --post-title-text:#8b8b8b;
+  --post-stamp-text:#8b8b8b;
+  --drop-down-color:#4B5D67;
+  --drop-down-text:#8b8b8b;
+}
+
 body{
-  background: #efefef;
+  background: var(--body-color);
+  transition: background 0.3s;
 }
 nav{
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: #ffffff;
+  background: var(--nav-color);
   padding: 5px 5%;
   position: sticky;
   top: 0;
@@ -75,14 +100,14 @@ nav{
 }
 .main-content{
   flex-basis:45%;
-  background: #efefef;
+  background: var(--body-color);
 
 }
 
 .profile-bar{
 
   flex-basis:45%;
-  background: #fff;
+  background: var(--post-color);
   top: 70px;
   position: sticky;
   align-self: flex-start;
@@ -102,7 +127,7 @@ nav{
 .main-profile h1{
   margin-bottom: -5px;
   font-weight: bold;
-  color: #626262;
+  color: var(--post-title-text);
   padding: 10px 5%;
 }
 
@@ -116,7 +141,7 @@ nav{
 .main-profile p {
   margin-bottom: -5px;
   font-weight: 500;
-  color: #626262;
+  color: var(--post-title-text);
   font-size: 14px;
   padding: 5%;
 }
@@ -130,10 +155,10 @@ nav{
 
 .write-post-container{
   width: 100%;
-  background: #fff;
+  background: var(--post-color);
   border-radius: 10px;
   padding: 20px;
-  color: #626262;
+  color: var(--post-title-text);
   border: 1px solid #dbdbdb;
 
 }
@@ -152,7 +177,7 @@ nav{
 .user-profile p {
   margin-bottom: -5px;
   font-weight: bold;
-  color: #626262;
+  color: var(--post-title-text);
 }
 
 .user-profile small {
@@ -175,11 +200,11 @@ nav{
 }
 .post-container{
   width: 100%;
-  background: #fff;
+  background: var(--post-color);
   border-radius: 10px;
   border: 1px solid #dbdbdb;
   padding: 2% 2%;
-  color: #626262;
+  color: var(--post-title-text);
   margin: 20px 0;
 }
 .user-profile span{
@@ -402,7 +427,7 @@ border: none !important;
   z-index: 2; /* Stay on top */
   top: 0; /* Stay at the top */
   right: 0;
-  background-color: rgb(255, 255, 255); /* Black*/
+  background-color: var(--sidenav-color); /* Black*/
   overflow-x: hidden; /* Disable horizontal scroll */
   padding-top: 60px; /* Place content 60px from the top */
   transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */

@@ -18,7 +18,7 @@
 <body>
     <nav class="navbar">
         <div class="nav-wrapper">
-            <img src="/images/logograd.PNG" class="brand-img" alt="">  
+            <img src="/images/logograd.PNG" class="brand-img" alt="">
             <div class="nav-items">
 
                 <button onclick="location.href='/newsfeed'" class="icon"><img src="/images/home.PNG" class="icon"
@@ -38,6 +38,7 @@
     <div id="mySidenav" class="sidenav">
     <b>{{this.username}}</b>
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a onclick="goDark();">Dark Mode</a>
     <a href="#">Edit Profile</a>
     <a href="#">Liked Posts</a>
     <a href="#">Privacy</a>
@@ -56,6 +57,13 @@
     function closeNav() {
       document.getElementById("mySidenav").style.width = "0";
     }
+    function goDark() {
+    var element = document.body;
+    // element.classList.toggle("dark");
+    // var element2 = document.navbar;
+    // element2.classList.toggle("navbarDark");
+    element.classList.toggle("dark-theme");
+  }
   </script>
 
     <section class="main">
@@ -64,21 +72,21 @@
                 <form method="POST" action="/upload" enctype="multipart/form-data" class="upload-form">
                 <p class="upload-title">Upload File:</p>
                         <input type="file" name="myFile" required />
-                        
+
   <p class="upload-title">Mashup Title:</p>
   <div class="col-6">
     <div class="form-floating mb-3">
-      <input type="text" name="mashupTitle" placeholder="Enter Title" required>   
+      <input type="text" name="mashupTitle" placeholder="Enter Title" required>
     </div>
   </div>
 
   <p class="upload-title">Mashup Description:</p>
   <div class="col-6">
     <div class="form-floating mb-3">
-      <input type="text" name="mashupDescription" placeholder="Enter Description" required> 
+      <input type="text" name="mashupDescription" placeholder="Enter Description" required>
     </div>
   </div>
-  
+
   <input type="submit" />
 </form>
 
