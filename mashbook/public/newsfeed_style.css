@@ -14,13 +14,23 @@
   --nav-color:#ffffff;
   --sidenav-color:#ffffff;
   --post-color:#ffffff;
+  --post-maker-text:#000;
+  --post-title-text:#000;
+  --post-stamp-text:rgba(0, 0, 0, 0.5);
+  --drop-down-color:#ffffff;
+  --drop-down-text:#000;
 }
 
 .dark-theme{
-  --body-color:#222;
-  --nav-color:#191A19;
-  --sidenav-color:#191A19;
-  --post-color:#191A19;
+  --body-color:#374045;
+  --nav-color:#4B5D67;
+  --sidenav-color:#4B5D67;
+  --post-color:#4B5D67;
+  --post-maker-text:#8b8b8b;
+  --post-title-text:#8b8b8b;
+  --post-stamp-text:#8b8b8b;
+  --drop-down-color:#4B5D67;
+  --drop-down-text:#8b8b8b;
 }
 body{
     width: 100%;
@@ -179,15 +189,6 @@ button{
     border-radius: 10px;
 }
 
-.postDark{
-    width: 100%;
-    height: auto;
-    background-color: #222;
-    border: 1px solid #dfdfdf;
-    margin-top: 40px;
-    align-self: left;
-    border-radius: 10px;
-}
 
 .info{
     width: 100%;
@@ -201,7 +202,7 @@ button{
 .info .username{
     width: auto;
     font-weight: bold;
-    color: #000;
+    color: var(--post-maker-text);
     font-size: 18px;
     margin-left: 10px;
 }
@@ -283,7 +284,7 @@ button{
 }
 
 .post-time{
-    color: rgba(0, 0, 0, 0.5);
+    color: var(--post-stamp-text);
     font-size: 12px;
 }
 
@@ -492,7 +493,7 @@ button{
 .dropdown-content {
     display: none;
     position: absolute;
-    background-color: #ffffff;
+    background-color: var(--drop-down-color);
     border: 1px solid #dbdbdb;
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
@@ -503,7 +504,7 @@ button{
 
 /* Links inside the dropdown */
 .dropdown-content a {
-    color: black;
+    color: var(--drop-down-text);
     padding: 12px 16px;
     text-decoration: none;
     display: block;
@@ -519,11 +520,12 @@ button{
 .dropdown:hover .dropdown-content {display: block;}
 
 /* Change the background color of the dropdown button when the dropdown content is shown */
-.dropdown:hover .dropbtn {background-color: #ffffff;}
+.dropdown:hover .dropbtn {background-color:var(--drop-down-color);}
 
 .title{
     font-weight: bold;
     font-size: larger;
+    color:var(--post-title-text);
 }
 
 .likes{
