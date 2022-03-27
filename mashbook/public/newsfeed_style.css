@@ -9,16 +9,26 @@
     outline: none;
 }
 
+:root{
+  --body-color:#f2f2f2;
+  --nav-color:#ffffff;
+  --sidenav-color:#ffffff;
+  --post-color:#ffffff;
+}
+
+.dark-theme{
+  --body-color:#222;
+  --nav-color:#191A19;
+  --sidenav-color:#191A19;
+  --post-color:#191A19;
+}
 body{
     width: 100%;
-    background: #f2f2f2;
+    background: var(--body-color);
+    transition: background 0.3s;
     position: relative;
 }
 
-.dark{
-            background-color: #222;
-            color: #e6e6e6;
-        }
 
 button{
     background: transparent;
@@ -57,7 +67,7 @@ button{
     left: 0;
     width: 100%;
     height: 50px;
-    background: #ffffff;
+    background: var(--nav-color);
     border-bottom: 1px solid #dbdbdb;
     display: flex;
     justify-content: center;
@@ -162,7 +172,17 @@ button{
 .post{
     width: 100%;
     height: auto;
-    background: #ffffff;
+    background: var(--post-color);
+    border: 1px solid #dfdfdf;
+    margin-top: 40px;
+    align-self: left;
+    border-radius: 10px;
+}
+
+.postDark{
+    width: 100%;
+    height: auto;
+    background-color: #222;
     border: 1px solid #dfdfdf;
     margin-top: 40px;
     align-self: left;
@@ -410,7 +430,7 @@ button{
     z-index: 1; /* Stay on top */
     top: 0; /* Stay at the top */
     right: 0;
-    background-color: rgb(255, 255, 255); /* Black*/
+    background-color: var(--sidenav-color); /* Black*/
     overflow-x: hidden; /* Disable horizontal scroll */
     padding-top: 60px; /* Place content 60px from the top */
     transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
