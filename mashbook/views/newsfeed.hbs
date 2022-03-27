@@ -30,6 +30,7 @@
     <div id="mySidenav" class="sidenav">
         <b>{{this.username}}</b>
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a onclick="goDark();">Dark Mode</a>
         <a href="#">Edit Profile</a>
         <a href="#">Liked Posts</a>
         <a href="#">Privacy</a>
@@ -48,6 +49,11 @@
         function closeNav() {
         document.getElementById("mySidenav").style.width = "0";
         }
+
+        function goDark() {
+        var element = document.body;
+        element.classList.toggle("dark");
+      }
     </script>
 
     <div class="foryou-weekly">
@@ -78,7 +84,7 @@
                 <div class="post-imgcont">
                     <img src="/{{this.path}}" class="post-image" alt="">
                     <div class="post-mashes">
-                        
+
                         <img src="/{{this.path}}" class="post-mash" alt="">
                         <img src="/{{this.path}}" class="post-mash" alt="">
                         <img src="/{{this.path}}" class="post-mash" alt="">
@@ -95,17 +101,17 @@
                     <p class="likes">{{this.reactions}} likes</p>
                     <p class="description">{{this.userPosted}}: {{this.mashupDescription}}</p>
                     <p class="post-time">{{this.datePosted}}</p>
- 
-               
+
+
                 </div>
                 <div class="comment-wrapper">
-                    
+
                     <form method="POST" action="/postComment/{{this.contentId}}" enctype="multipart/form-data" class="comment-wrapper">
                         <input type="text" name="comment" class="comment-box" placeholder="Add a comment">
                         <button class="comment-btn">post</button>
                     </form>
                 </div>
-     
+
             </div>
         </div>
     </section>
