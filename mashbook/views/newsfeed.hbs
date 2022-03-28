@@ -30,6 +30,7 @@
     <div id="mySidenav" class="sidenav">
         <b>{{this.username}}</b>
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a onclick="goDark();">Dark Mode</a>
         <a href="#">Edit Profile</a>
         <a href="#">Liked Posts</a>
         <a href="#">Privacy</a>
@@ -48,6 +49,14 @@
         function closeNav() {
         document.getElementById("mySidenav").style.width = "0";
         }
+
+        function goDark() {
+        var element = document.body;
+        // element.classList.toggle("dark");
+        // var element2 = document.navbar;
+        // element2.classList.toggle("navbarDark");
+        element.classList.toggle("dark-theme");
+      }
     </script>
 
     <div class="foryou-weekly">
@@ -77,13 +86,22 @@
                 </div>
                 <div class="post-imgcont">
                     <img src="/{{this.path}}" class="post-image" alt="">
-                    <div class="post-mashes">
-                        
-                        <img src="/{{this.path}}" class="post-mash" alt="">
-                        <img src="/{{this.path}}" class="post-mash" alt="">
-                        <img src="/{{this.path}}" class="post-mash" alt="">
-                        <img src="/{{this.path}}" class="post-mash" alt="">
-                    </div>
+                    <a href="/gallery/{{this.mashupId}}">
+                        <div class="post-mashes">
+                            <div class="post-mash-container">
+                            <img src="/{{this.path}}" class="post-mash" alt="">
+                            </div>
+                            <div class="post-mash-container">
+                            <img src="/{{this.path}}" class="post-mash" alt="">
+                            </div>
+                            <div class="post-mash-container">
+                            <img src="/{{this.path}}" class="post-mash" alt="">
+                            </div>
+                            <div class="post-mash-container">
+                            <img src="/{{this.path}}" class="post-mash" alt="">
+                            </div>
+                        </div>
+                    </a>
                 </div>
                 <div class="post-content">
                     <div class="reaction-wrapper">
@@ -95,17 +113,17 @@
                     <p class="likes">{{this.reactions}} likes</p>
                     <p class="description">{{this.userPosted}}: {{this.mashupDescription}}</p>
                     <p class="post-time">{{this.datePosted}}</p>
- 
-               
+
+
                 </div>
                 <div class="comment-wrapper">
-                    
+
                     <form method="POST" action="/postComment/{{this.contentId}}" enctype="multipart/form-data" class="comment-wrapper">
                         <input type="text" name="comment" class="comment-box" placeholder="Add a comment">
                         <button class="comment-btn">post</button>
                     </form>
                 </div>
-     
+
             </div>
         </div>
     </section>

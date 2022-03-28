@@ -9,11 +9,36 @@
     outline: none;
 }
 
+:root{
+  --body-color:#f2f2f2;
+  --nav-color:#ffffff;
+  --sidenav-color:#ffffff;
+  --post-color:#ffffff;
+  --post-maker-text:#000;
+  --post-title-text:#000;
+  --post-stamp-text:rgba(0, 0, 0, 0.5);
+  --drop-down-color:#ffffff;
+  --drop-down-text:#000;
+}
+
+.dark-theme{
+  --body-color:#374045;
+  --nav-color:#4B5D67;
+  --sidenav-color:#4B5D67;
+  --post-color:#4B5D67;
+  --post-maker-text:#8b8b8b;
+  --post-title-text:#8b8b8b;
+  --post-stamp-text:#8b8b8b;
+  --drop-down-color:#4B5D67;
+  --drop-down-text:#8b8b8b;
+}
 body{
     width: 100%;
-    background: #f2f2f2;
+    background: var(--body-color);
+    transition: background 0.3s;
     position: relative;
 }
+
 
 button{
     background: transparent;
@@ -52,7 +77,7 @@ button{
     left: 0;
     width: 100%;
     height: 50px;
-    background: #ffffff;
+    background: var(--nav-color);
     border-bottom: 1px solid #dbdbdb;
     display: flex;
     justify-content: center;
@@ -157,12 +182,13 @@ button{
 .post{
     width: 100%;
     height: auto;
-    background: #ffffff;
+    background: var(--post-color);
     border: 1px solid #dfdfdf;
     margin-top: 40px;
     align-self: left;
     border-radius: 10px;
 }
+
 
 .info{
     width: 100%;
@@ -176,7 +202,7 @@ button{
 .info .username{
     width: auto;
     font-weight: bold;
-    color: #000;
+    color: var(--post-maker-text);
     font-size: 18px;
     margin-left: 10px;
 }
@@ -208,7 +234,7 @@ button{
     grid-template-columns: 50% 50%;
     padding-left: 2.5%;
     padding-right: 2.5%;
-} 
+}
 
 .post-image{
     width: 100%;
@@ -232,11 +258,18 @@ button{
     padding-left: 2.5%;
 }
 
-.post-mash{
+.post-mash-container{
     width: 98%;
     height: 98%;
     border: 1px solid #dfdfdf;
     border-radius: 10px;
+    overflow: hidden;
+}
+
+.post-mash{
+    width: 100%;
+    height: 100%;
+    filter: blur(4px);
 }
 
 .post-content{
@@ -258,7 +291,7 @@ button{
 }
 
 .post-time{
-    color: rgba(0, 0, 0, 0.5);
+    color: var(--post-stamp-text);
     font-size: 12px;
 }
 
@@ -356,7 +389,7 @@ button{
 .upload {
     width: 100%;
     /*height: 80px;*/
-    background: #fff;
+    background: var(--post-color);
     border: 1px solid #dfdfdf;
     border-radius: 10px;
     text-align: center;
@@ -405,13 +438,13 @@ button{
     z-index: 1; /* Stay on top */
     top: 0; /* Stay at the top */
     right: 0;
-    background-color: rgb(255, 255, 255); /* Black*/
+    background-color: var(--sidenav-color); /* Black*/
     overflow-x: hidden; /* Disable horizontal scroll */
     padding-top: 60px; /* Place content 60px from the top */
     transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
     border-left: 1px solid #dbdbdb;
 }
-  
+
 /* The navigation menu links */
 .sidenav a {
     padding: 8px 8px 8px 32px;
@@ -421,7 +454,7 @@ button{
     display: block;
     transition: 0.3s;
 }
-  
+
 /* When you mouse over the navigation links, change their color */
 .sidenav a:hover {
     color: #f1f1f1;
@@ -441,7 +474,7 @@ button{
     display: block;
     transition: 0.3s;
 }
-  
+
 /* Position and style the close button (top right corner) */
 .sidenav .closebtn {
     position: absolute;
@@ -456,18 +489,18 @@ button{
     border: none;
     padding-right: 15px;
 }
-  
+
 /* The container <div> - needed to position the dropdown content */
 .dropdown {
     position: relative;
     display: inline-block;
 }
-  
+
 /* Dropdown Content (Hidden by Default) */
 .dropdown-content {
     display: none;
     position: absolute;
-    background-color: #ffffff;
+    background-color: var(--drop-down-color);
     border: 1px solid #dbdbdb;
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
@@ -475,15 +508,15 @@ button{
     border-radius: 10px;
     right: 0px;
 }
-  
+
 /* Links inside the dropdown */
 .dropdown-content a {
-    color: black;
+    color: var(--drop-down-text);
     padding: 12px 16px;
     text-decoration: none;
     display: block;
 }
-  
+
 /* Change color of dropdown links on hover */
 .dropdown-content a:hover {
     background-color: #ddd;
@@ -494,11 +527,12 @@ button{
 .dropdown:hover .dropdown-content {display: block;}
 
 /* Change the background color of the dropdown button when the dropdown content is shown */
-.dropdown:hover .dropbtn {background-color: #ffffff;}
+.dropdown:hover .dropbtn {background-color:var(--drop-down-color);}
 
 .title{
     font-weight: bold;
     font-size: larger;
+    color:var(--post-title-text);
 }
 
 .likes{

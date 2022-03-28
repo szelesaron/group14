@@ -33,6 +33,7 @@
   <div id="mySidenav" class="sidenav">
     <b>{{this.username}}</b>
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a onclick="goDark();">Dark Mode</a>
     <a href="#">Edit Profile</a>
     <a href="#">Liked Posts</a>
     <a href="#">Privacy</a>
@@ -51,6 +52,13 @@
     function closeNav() {
       document.getElementById("mySidenav").style.width = "0";
     }
+    function goDark() {
+    var element = document.body;
+    // element.classList.toggle("dark");
+    // var element2 = document.navbar;
+    // element2.classList.toggle("navbarDark");
+    element.classList.toggle("dark-theme");
+  }
   </script>
 
   <div class="originalWrap">
@@ -66,13 +74,13 @@
     <a href="/addtomashup/{{this.mashup.mashupId}}">Add to Mashup</a>
   </div>
 
-  
+
 
   <div class="content">
 
 
     <section id="mashes">
-      
+
 
       {{#each content}}
       <div class="project">
