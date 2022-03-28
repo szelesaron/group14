@@ -69,7 +69,7 @@
                     <div class="dropdown" style="float: right;">
                         <button class="dropbtn"><img src="/images/option.PNG" class="options" alt=""></button>
                         <div class="dropdown-content">
-                            <a href="/reportcontent/{{this.mashupId}}">Report</a>
+                            <a href="/reportcontent/{{this.content.mashupId}}">Report</a>
                         </div>
                     </div>
                 </div>
@@ -94,9 +94,16 @@
                     <div class="reaction-wrapper">
 
                         <button onclick="location.href='/likemashupone/{{this.content.mashupId}}';"><img src="/images/like.PNG" class="icon" alt=""></button>
+<<<<<<< HEAD
+                        <button onclick="location.href='/postCommentMashup/{{this.content.mashupId}}';"><img src="/images/comment.PNG" class="icon" alt=""></button>
+                        <button><img src="/images/send.PNG" class="icon" alt=""></button>
+                        <button onclick="location.href='/gallery/{{this.content.mashupId}}';"><img src="/images/paint.PNG" class="right icon" alt=""></button>
+                        <button><img src="/images/save.PNG" class="right icon" alt=""></button>
+=======
                         <button onclick=""><img src="/images/comment.PNG" class="icon" alt=""></button>
                         <button><img src="/images/paint.PNG" class="right icon" alt=""></button>
 
+>>>>>>> b63a8ab9c35ebf08d9f8801fd1d035229a970d54
                     </div>
                     <p class="likes">{{this.content.reactions}} likes</p>
                     <p class="description"><span>{{this.content.userPosted}}</span>
