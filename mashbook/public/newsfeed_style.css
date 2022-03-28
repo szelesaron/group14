@@ -545,6 +545,22 @@ button{
     color:#8b8b8b;
 }
 
+.each-comment{
+    color:#8b8b8b;
+}
+
+.comment-usernm{
+    font-weight: bold;
+}
+
+.comment-contnt{
+    
+}
+
+.comment-date{
+    font-size:xx-small;
+}
+
 @media (max-width: 1300px){
     .search-box{
         display: none;

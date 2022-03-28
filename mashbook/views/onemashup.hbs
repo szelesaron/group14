@@ -104,10 +104,11 @@
                     </p>
                     <p class="post-time">{{this.content.datePosted}}</p>
  
-
+                    <div class="">
                         {{#each comments}}
-                            {{this.userCommented}}:{{this.comment}} - {{this.commentDate}}<br>
+                            <div class = "each-comment"><div class="comment-usernm">{{this.userCommented}}: </div><div class="comment-contnt">{{this.comment}}</div><div class="comment-date">{{this.commentDate}}</div></div>
                         {{/each}}
+                    </div>
 
                 </div>
                 <div class="comment-wrapper">
