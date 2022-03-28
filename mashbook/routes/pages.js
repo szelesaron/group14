@@ -202,7 +202,7 @@ router.post('/postComment/:id', (req, res) => {
             //insert comment into db
             db.query("INSERT INTO comments (contentId, userCommented, comment, commentDate) VALUES (?, ?, ?, ?)", [req.params.id, decoded.username, req.body.comment, date], (err, result) => {
                 if (err) throw err;
-                res.redirect('/onemashup/' + req.params.id);
+                res.redirect('/post/' + req.params.id);
             });
         }
     });
@@ -298,6 +298,48 @@ router.get('/likemashup/:id', (req, res) => {
                     db.query('UPDATE mashups SET reactions = reactions + 1 WHERE mashupId = ?', [req.params.id], (err, result) => {
                         if (err) throw err;
                         res.redirect('/');
+                    });
+
+                    //add user to likes table
+                    db.query('INSERT INTO likes (mashupId, userLiked) VALUES (?, ?)', [req.params.id, decoded.username], (err, result) => {
+                        if (err) throw err;
+                    });
+                }
+            });
+
+        }
+    });
+});
+// like mashup on weekly
+router.get('/likemushupweekly/:id', (req, res) => {
+    //redirect only if user is logged in
+    jwt.verify(req.cookies.jwt, process.env.JWT_SECRET, (err, decoded) => {
+        if (err) {
+            res.redirect('/mashup');
+        } else {
+
+            //if already liked, unlike
+            db.query('SELECT * FROM likes WHERE mashupId = ? AND userLiked = ?', [req.params.id, decoded.username], (err, result) => {
+                if (err) throw err;
+
+                if (result.length > 0) {
+                    db.query('DELETE FROM likes WHERE mashupId = ? AND userLiked = ?', [req.params.id, decoded.username], (err, result) => {
+                        if (err) throw err;
+                        res.redirect('/mashup');
+                    });
+
+                    //decrease like count
+                    db.query('UPDATE mashups SET reactions = reactions - 1 WHERE mashupId = ?', [req.params.id], (err, result) => {
+                        if (err) throw err;
+                    });
+                }
+
+                else {
+
+                    //increment like count
+                    db.query('UPDATE mashups SET reactions = reactions + 1 WHERE mashupId = ?', [req.params.id], (err, result) => {
+                        if (err) throw err;
+                        res.redirect('/mashup');
                     });
 
                     //add user to likes table

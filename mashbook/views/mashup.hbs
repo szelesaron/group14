@@ -71,7 +71,6 @@
                         <button class="dropbtn"><img src="/images/option.PNG" class="options" alt=""></button>
                         <div class="dropdown-content">
                              <a href="/gallery/{{this.mashupId}}">Gallery</a>
-                            <a href="/editcontent/{{this.contentId}}">Edit Post</a>
                             <a href="/reportcontent/{{this.contentId}}">Report</a>
                         </div>
                     </div>
@@ -89,10 +88,10 @@
                 <div class="post-content">
                     <div class="reaction-wrapper">
 
-                        <button onclick="location.href='/like/{{this.contentId}}';"><img src="/images/like.PNG" class="icon" alt=""></button>
-                        <button onclick="location.href='/post/{{this.contentId}}';"><img src="/images/comment.PNG" class="icon" alt=""></button>
-                        <button><img src="/images/paint.PNG" class="right icon" alt=""></button>
-
+                        <button onclick="location.href='/likemushupweekly/{{this.mashupId}}';"><img src="/images/like.PNG" class="icon" alt=""></button>
+                        <button onclick=""><img src="/images/comment.PNG" class="icon" alt=""></button>
+                        <button onclick="location.href='/gallery/{{this.mashupId}}';"><img src="/images/paint.PNG" class="right icon" alt=""></button>
+                   
                     </div>
                     <row>
                     <p class="title">{{this.mashupTitle}}</p>
@@ -105,7 +104,7 @@
                 </div>
                 <div class="comment-wrapper">
                     
-                    <form method="POST" action="/postComment/{{this.contentId}}" enctype="multipart/form-data" class="comment-wrapper">
+                    <form method="POST" action="/postComment/{{this.mashupId}}" enctype="multipart/form-data" class="comment-wrapper">
                         <input type="text" name="comment" class="comment-box" placeholder="Add a comment">
                         <button class="comment-btn">post</button>
                     </form>
