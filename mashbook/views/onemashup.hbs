@@ -94,16 +94,13 @@
                     <div class="reaction-wrapper">
 
                         <button onclick="location.href='/likemashupone/{{this.content.mashupId}}';"><img src="/images/like.PNG" class="icon" alt=""></button>
-<<<<<<< HEAD
                         <button onclick="location.href='/postCommentMashup/{{this.content.mashupId}}';"><img src="/images/comment.PNG" class="icon" alt=""></button>
                         <button><img src="/images/send.PNG" class="icon" alt=""></button>
                         <button onclick="location.href='/gallery/{{this.content.mashupId}}';"><img src="/images/paint.PNG" class="right icon" alt=""></button>
                         <button><img src="/images/save.PNG" class="right icon" alt=""></button>
-=======
                         <button onclick=""><img src="/images/comment.PNG" class="icon" alt=""></button>
                         <button><img src="/images/paint.PNG" class="right icon" alt=""></button>
 
->>>>>>> b63a8ab9c35ebf08d9f8801fd1d035229a970d54
                     </div>
                     <p class="likes">{{this.content.reactions}} likes</p>
                     <p class="description"><span>{{this.content.userPosted}}</span>
@@ -111,7 +108,7 @@
                     </p>
                     <p class="post-time">{{this.content.datePosted}}</p>
  
-                    <div class="">
+                    <div class="comment-scrollbox">
                         {{#each comments}}
                             <div class = "each-comment"><div class="comment-usernm">{{this.userCommented}}: </div><div class="comment-contnt">{{this.comment}}</div><div class="comment-date">{{this.commentDate}}</div></div>
                         {{/each}}

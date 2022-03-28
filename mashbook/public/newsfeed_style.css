@@ -545,6 +545,12 @@ button{
     color:#8b8b8b;
 }
 
+.comment-scrollbox{
+    width: 100%;
+    height: 100px;
+    overflow-y: scroll;
+}
+
 .each-comment{
     color:#8b8b8b;
 }
