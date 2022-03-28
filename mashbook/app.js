@@ -57,7 +57,7 @@ db.query(create_table_likes, (err, result) => {
 
 //create table for comments
 let create_table_comments =
-"CREATE TABLE IF NOT EXISTS comments (commentId INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT, contentId INT(11) NOT NULL , userCommented VARCHAR(100) NOT NULL, comment VARCHAR(255) NOT NULL, commentDate DATE NOT NULL)";
+"CREATE TABLE IF NOT EXISTS comments (commentId INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT, mashupId INT(11) NOT NULL, contentId INT(11) NOT NULL , userCommented VARCHAR(100) NOT NULL, comment VARCHAR(255) NOT NULL, commentDate DATE NOT NULL)";
 db.query(create_table_comments, (err, result) => {
     if (err) throw err;
 });
