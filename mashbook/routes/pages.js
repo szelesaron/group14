@@ -77,7 +77,7 @@ router.get('/newsfeed', (req, res) => {
             res.redirect('/');
         } else {
             //render posts from database
-            db.query("SELECT * FROM mashups WHERE userPosted != 'MashbookTeam' ORDER BY mashupId DESC;", (err, result) => {
+            db.query("SELECT * FROM mashups WHERE userPosted != 'MashbookTeam' AND mashupStatus = 'Active' ORDER BY mashupId DESC;", (err, result) => {
                 if (err) throw err;
                 res.render('newsfeed', {
                     content: result
@@ -96,7 +96,7 @@ router.get('/mashup', (req, res) => {
             res.redirect('/');
         } else {
             //render posts from database
-            db.query("SELECT * FROM mashups WHERE userPosted = 'MashbookTeam' ORDER BY mashupId DESC;", (err, result) => {
+            db.query("SELECT * FROM mashups WHERE userPosted = 'MashbookTeam' AND mashupStatus = 'Active' ORDER BY mashupId DESC;", (err, result) => {
                 if (err) throw err;
                 res.render('mashup', { content: result, username: decoded.username });
                 
@@ -179,10 +179,10 @@ router.get('/post', (req, res) => {
 router.get('/gallery/:id', (req, res) => {
     //get comments for post from db
     galleryId = req.params.id;
-    db.query('SELECT * FROM content WHERE mashupId = ?  ORDER BY reactions DESC', [req.params.id], (err, content) => {
+    db.query("SELECT * FROM content WHERE mashupId = ? AND contentStatus = 'Active' ORDER BY reactions DESC", [req.params.id], (err, content) => {
         if (err) throw err;
             
-        db.query('SELECT * FROM mashups WHERE mashupId = ?', [req.params.id], (err, mashup) => {
+        db.query("SELECT * FROM mashups WHERE mashupId = ? AND mashupStatus = 'Active' ", [req.params.id], (err, mashup) => {
             if (err) throw err;
             res.render('gallery', {mashup: mashup[0], content: content});
         
