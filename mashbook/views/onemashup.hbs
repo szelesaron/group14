@@ -20,6 +20,7 @@
 
                 <button onclick="location.href='/newsfeed';" class = "icon"><img src="/images/home.PNG" class="icon" alt=""></button>
                 <button onclick="location.href='/post';" class="icon"><img src="/images/add.PNG" class="icon" alt=""></button>
+                <button onclick="" class = "icon"><img src="/images/like.PNG" class="icon" alt=""></button>
                 <button onclick="openNav();" class="icon"><img src="/images/option.PNG" class="icon" alt=""></button>
                 <button onclick="location.href='/profile';" class="icon user-profile"></button>
 
@@ -30,7 +31,6 @@
     <div id="mySidenav" class="sidenav">
         <b>{{this.username}}</b>
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <a onclick="goDark();">Dark Mode</a>
         <a href="#">Edit Profile</a>
         <a href="#">Liked Posts</a>
         <a href="#">Privacy</a>
@@ -49,14 +49,6 @@
         function closeNav() {
         document.getElementById("mySidenav").style.width = "0";
         }
-
-        function goDark() {
-        var element = document.body;
-        // element.classList.toggle("dark");
-        // var element2 = document.navbar;
-        // element2.classList.toggle("navbarDark");
-        element.classList.toggle("dark-theme");
-      }
     </script>
 
     <div class="foryou-weekly">
@@ -65,69 +57,66 @@
         <button onclick="location.href='/mashup';"><b class="weekly">Weekly</b></button>
     </div>
 
-
-    {{#each content}}
-
+    
     <section class="main">
         <div class="wrapper">
             <div class="post">
                 <div class="info">
                     <div class="user">
                         <div class="profile-pic"><img src="/images/profile-pic.png" alt=""></div>
-                        <p class="username">{{this.userPosted}}</p>
+                        <p class="username">{{this.content.userPosted}}</p>
                     </div>
                     <div class="dropdown" style="float: right;">
                         <button class="dropbtn"><img src="/images/option.PNG" class="options" alt=""></button>
                         <div class="dropdown-content">
-                             <a href="/gallery/{{this.mashupId}}">Gallery</a>
-                            <a href="/reportcontent/{{this.contentId}}">Report</a>
+                            <a href="/reportcontent/{{this.mashupId}}">Report</a>
                         </div>
                     </div>
                 </div>
                 <div class="post-imgcont">
-                    <img src="/{{this.path}}" class="post-image" alt="">
-                    <a href="/gallery/{{this.mashupId}}">
-                        <div class="post-mashes">
-                            <div class="post-mash-container">
-                            <img src="/{{this.path}}" class="post-mash" alt="">
-                            </div>
-                            <div class="post-mash-container">
-                            <img src="/{{this.path}}" class="post-mash" alt="">
-                            </div>
-                            <div class="post-mash-container">
-                            <img src="/{{this.path}}" class="post-mash" alt="">
-                            </div>
-                            <div class="post-mash-container">
-                            <img src="/{{this.path}}" class="post-mash" alt="">
-                            </div>
-                        </div>
-                    </a>
+                    <img src="/{{this.content.path}}" class="post-image" alt="">
+                    <div class="post-mashes">
+                        <img src="/{{this.content.path}}" class="post-mash" alt="">
+                        <img src="/{{this.content.path}}" class="post-mash" alt="">
+                        <img src="/{{this.content.path}}" class="post-mash" alt="">
+                        <img src="/{{this.content.path}}" class="post-mash" alt="">
+                    </div>
                 </div>
                 <div class="post-content">
                     <div class="reaction-wrapper">
-                        <button onclick="location.href='/like/{{this.contentId}}';"><img src="/images/like.PNG" class="icon" alt=""></button>
-                        <button onclick=""><img src="/images/comment.PNG" class="icon" alt=""></button>
-                        <button onclick="location.href='/addtomashup/{{this.mashupId}}';"><img src="/images/paint.PNG" class="right icon" alt=""></button>
-                    </div>
-                    <p class="title">{{this.mashupTitle}}</p>
-                    <p class="likes">{{this.reactions}} likes</p>
-                    <p class="description">{{this.userPosted}}: {{this.mashupDescription}}</p>
-                    <p class="post-time">{{this.datePosted}}</p>
 
+                        <button onclick="location.href='/like/{{this.content.contentId}}';"><img src="/images/like.PNG" class="icon" alt=""></button>
+                        <button onclick="location.href='/post/{{this.content.contentId}}';"><img src="/images/comment.PNG" class="icon" alt=""></button>
+                        <button><img src="/images/send.PNG" class="icon" alt=""></button>
+                        <button><img src="/images/paint.PNG" class="right icon" alt=""></button>
+                        <button><img src="/images/save.PNG" class="right icon" alt=""></button>
+                    </div>
+                    <p class="likes">{{this.content.reactions}} likes</p>
+                    <p class="description"><span>{{this.content.userPosted}}</span>
+                        {{this.content.description}}
+                    </p>
+                    <p class="post-time">{{this.content.datePosted}}</p>
+ 
+
+                        {{#each comments}}
+                            {{this.userCommented}}:{{this.comment}} - {{this.commentDate}}<br>
+                        {{/each}}
 
                 </div>
                 <div class="comment-wrapper">
-
-                    <form method="POST" action="/postCommentMashup/{{this.mashupId}}" enctype="multipart/form-data" class="comment-wrapper">
+                    
+                    <form method="POST" action="/postCommentMashup/{{this.content.mashupId}}" enctype="multipart/form-data" class="comment-wrapper">
                         <input type="text" name="comment" class="comment-box" placeholder="Add a comment">
                         <button class="comment-btn">post</button>
                     </form>
-                </div>
 
+
+         
+                </div>
+     
             </div>
         </div>
     </section>
-    {{/each}}
 
 </body>
 

@@ -37,6 +37,7 @@ router.get('/', (req, res) => {
     );
 });
 
+// register page get
 router.get('/register', (req, res) => {
     res.render('register');
 });
@@ -54,9 +55,21 @@ router.get('/post/:id', (req, res) => {
         });
     });
 });
+//show one mashup post if clicked on
+router.get('/oneMashup/:id', (req, res) => {
+    //get comments for post from db
+    db.query('SELECT * FROM comments WHERE mashupId = ?', [req.params.id], (err, comment_result) => {
+        if (err) throw err;
+            
+        db.query('SELECT * FROM mashups WHERE mashupId = ?', [req.params.id], (err, result) => {
+            if (err) throw err;
+            res.render('oneMashup', {content: result[0], comments: comment_result});
+        
+        });
+    });
+});
 
-
-
+// newsfeed page get
 router.get('/newsfeed', (req, res) => {
     //redirect only if user is logged in
     jwt.verify(req.cookies.jwt, process.env.JWT_SECRET, (err, decoded) => {
@@ -75,19 +88,7 @@ router.get('/newsfeed', (req, res) => {
     });
 });
 
-//mashup partial page for 4 mashup images
-router.get('/partials/fourimages', (req, res) => {
-    jwt.verify(req.cookies.jwt, process.env.JWT_SECRET, (err, decoded) => {
-        if (err) {
-            res.redirect('/');
-        } else {
-            res.render('fourimages');
-        }
-    });
-});
-
-
-//mashup page
+//weekly mashup page
 router.get('/mashup', (req, res) => {
     //redirect only if user is logged in
     jwt.verify(req.cookies.jwt, process.env.JWT_SECRET, (err, decoded) => {
@@ -201,7 +202,25 @@ router.post('/postComment/:id', (req, res) => {
             //insert comment into db
             db.query("INSERT INTO comments (contentId, userCommented, comment, commentDate) VALUES (?, ?, ?, ?)", [req.params.id, decoded.username, req.body.comment, date], (err, result) => {
                 if (err) throw err;
-                res.redirect('/post/' + req.params.id);
+                res.redirect('/onemashup/' + req.params.id);
+            });
+        }
+    });
+});
+
+//post comment
+router.post('/postCommentMashup/:id', (req, res) => {
+    //get current date
+
+    //redirect only if user is logged in
+    jwt.verify(req.cookies.jwt, process.env.JWT_SECRET, (err, decoded) => {
+        if (err) {
+            res.redirect('/');
+        } else {
+            //insert comment into db
+            db.query("INSERT INTO comments (mashupId, userCommented, comment, commentDate) VALUES (?, ?, ?, ?)", [req.params.id, decoded.username, req.body.comment, date], (err, result) => {
+                if (err) throw err;
+                res.redirect('/onemashup/' + req.params.id);
             });
         }
     });
