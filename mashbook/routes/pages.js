@@ -673,6 +673,7 @@ router.post('/addtomashup/:id', (req, res) => {
                     let masterPicture = result[0].path;
                     let secondaryPicture = path
                     let compositionType = req.body.sharpType
+                    let gravity = req.body.gravity
 
                     if(compositionType == "none")
                     {
@@ -689,7 +690,7 @@ router.post('/addtomashup/:id', (req, res) => {
                     //create image composition with sharp
                     sharp("./public/"+masterPicture)
                         .composite([
-                            { input: secondaryPicture, blend: compositionType , opacity: 0.5 }
+                            { input: secondaryPicture, blend: compositionType , opacity: 0.5, gravity: gravity }
                         ])
                         .toFile('./public/uploads/mashup' + date + "-" + file.name, (err, info) => {
                             //if error notify user about file being too big
@@ -870,7 +871,8 @@ router.post('/mashit/:id', (req, res) => {
                     let masterPicture2 = result[0].path;
                     let secondaryPicture2 = path
                     let compositionType2 = req.body.sharpType
-                 
+                    let gravity = req.body.gravity
+        
 
                     if(compositionType2 == "none")
                     {
@@ -887,7 +889,7 @@ router.post('/mashit/:id', (req, res) => {
                     //create image composition with sharp
                     sharp("./public/"+masterPicture2)
                         .composite([
-                            { input: secondaryPicture2, blend: compositionType2 , opacity: 0.5 }
+                            { input: secondaryPicture2, blend: compositionType2 , opacity: 0.5, gravity: gravity }
                         ])
                         .toFile('./public/uploads/mashup' + date + "-" + file.name, (err, info) => {
                             //if error notify user about file being too big
@@ -1051,7 +1053,8 @@ router.post('/mashup/:id', (req, res) => {
                     let masterPicture = result[0].path;
                     let secondaryPicture = path
                     let compositionType = req.body.sharpType
-                 
+                    let gravity = req.body.gravity
+                
 
                     if(compositionType == "none")
                     {
@@ -1068,7 +1071,7 @@ router.post('/mashup/:id', (req, res) => {
                     //create image composition with sharp
                     sharp("./public/"+masterPicture)
                         .composite([
-                            { input: secondaryPicture, blend: compositionType , opacity: 0.5 }
+                            { input: secondaryPicture, blend: compositionType , opacity: 0.5, gravity: gravity }
                         ])
                         .toFile('./public/uploads/mashup' + date + "-" + file.name, (err, info) => {
                             //if error notify user about file being too big
