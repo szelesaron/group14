@@ -406,6 +406,173 @@ router.get('/addtomashup/:id', (req, res) => {
         }
     });
 });
+//add to mashup page
+router.post('/addtomashup/:id', (req, res) => {
+
+    //if no file is uploaded
+    if (!req.files) {
+        return res.render('/addtomashup/' + mashupId, {
+            message: 'No file selected'
+        });
+    }
+    
+    //get the file
+    const file = req.files.myFile;
+    const path = "./public/uploads/" + date + file.name;
+    const description = req.body.description;
+
+    //connect to AWS
+    const fs = require('fs');
+    const AWS = require('aws-sdk');
+    const threshold = 0.5;
+    var nsfw = false;
+
+    const s3 = new AWS.S3({
+        accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+        region: 'eu-west-2'
+    });
+
+
+    //save file locally
+    file.mv(path, (err) => {
+        if (err) {
+            return res.status(500).send(err);
+        }
+    });
+
+    /*
+    //check if file is safe
+    const axios = require('axios');
+    const FormData = require('form-data');
+    data = new FormData();
+    data.append('media', fs.createReadStream(path));
+    data.append('workflow', 'wfl_bg7bUanHbgxAyWrUSluw4');
+    data.append('api_user', '1048162863');
+    data.append('api_secret', 'SMfANvuXJXSxzeq8KYfx');
+    await axios({
+        method: 'post',
+        url: 'https://api.sightengine.com/1.0/check-workflow.json',
+        data: data,
+        headers: data.getHeaders()
+    }).then(function (response) {
+        if (response.data.summary.reject_prob > threshold) {
+            console.log(response.data);
+            nsfw = true;
+        }
+    }).catch(function (error) {
+        // handle error
+        if (error.response) console.log(error.response.data);
+        else console.log(error.message);
+    });
+    //if not safe, delete file and redirect to post page
+    if (nsfw) {
+        fs.unlink(path, (err) => {
+            if (err) throw err;
+        });
+        return res.render('/addtomashup/' + mashupId, {
+            message: 'Inappropriate content detected. Please try again.'
+        });
+    }
+    */
+    /*
+    //if safe, upload to s3
+    else {
+        var params = {
+            Bucket: "images-mashbook",
+            Key: date + file.name,
+            ContentType: file.type,
+            ACL: 'bucket-owner-full-control',
+            Body: fs.readFileSync(path)
+        }
+        s3.upload(params, function (err, data) {
+            if (err) {
+                console.log(err);
+            }
+            if (data) {
+                console.log('File uploaded successfully to S3.');
+            }
+        });
+    }
+    */
+
+    //only allow jpg, jpeg, png
+    if (file.mimetype !== 'image/jpeg' && file.mimetype !== 'image/png' && file.mimetype !== 'image/jpg' && file.mimetype !== 'image/gif') {
+        return res.render('/addtomashup/' + mashupId, {
+            message: 'File type not allowed'
+        });
+    }
+
+    //only allow files under 2MB
+    if (file.size > 2000000) {
+        return res.render('post', {
+            message: 'File size too large'
+        });
+    }
+
+    file.mv(path, (err) => {
+        if (err) {
+            console.log("Already exists");
+        }
+        //get logged in username
+        jwt.verify(req.cookies.jwt, process.env.JWT_SECRET, (err, decoded) => {
+            if (err) {
+                return res.redirect('/');
+            }
+            else {
+
+                //get master picture from id
+                result = db.query('SELECT * FROM mashups WHERE mashupId = ?', [req.params.id], (err, result) => {
+                    if (err) throw err;
+
+                    let masterPicture = result[0].path;
+                    let secondaryPicture = path
+                    let compositionType = req.body.sharpType
+
+                    if(compositionType == "none")
+                    {
+                        result = db.query('INSERT INTO content (mashupId, userPosted, datePosted, description, path) VALUES (?, ?, ?, ?, ?)', [req.params.id, decoded.username , date, description, "uploads/" + secondaryPicture.split("/")[3]], (err, result) => {
+                            if (err) throw err;
+                            return res.redirect('../gallery/' + req.params.id);
+                        });
+                    }
+                    else
+                    {
+
+                    
+                    
+                    //create image composition with sharp
+                    sharp("./public/"+masterPicture)
+                        .composite([
+                            { input: secondaryPicture, blend: compositionType , opacity: 0.5 }
+                        ])
+                        .toFile('./public/uploads/mashup' + date + "-" + file.name, (err, info) => {
+                            //if error notify user about file being too big
+                            if (err){
+                                console.log(err);
+                                return res.redirect('/errorpage');
+                            }
+                            
+                            else
+                            {
+                                //insert into content table
+                                result = db.query('INSERT INTO content (mashupId, userPosted, datePosted, description, path) VALUES (?, ?, ?, ?, ?)', [mashupId, decoded.username , date, description, "uploads/mashup" + date+ "-" + file.name], (err, result) => {
+                                    if (err) throw err;
+
+                                    return res.redirect('../gallery/' + mashupId);
+                                });
+                            }
+                        });
+                    }
+
+                });
+
+
+
+            }
+        });
+    });
+});
 //add to mashup/ mashup content picture instead of the main
 router.get('/mashit/:id', (req, res) => {
     //redirect only if user is logged in
@@ -786,186 +953,7 @@ router.post('/mashup/:id', (req, res) => {
     });
 });
 
-//add to mashup page
-router.post('/addtomashup/:id', (req, res) => {
-    mashupId = req.params.id;
-    //if no file is uploaded
-    if (!req.files) {
-        return res.render('/addtomashup/' + mashupId, {
-            message: 'No file selected'
-        });
-    }
-    
-    //get the file
-    const file = req.files.myFile;
-    const path = "./public/uploads/" + date + file.name;
-    const description = req.body.description;
 
-    //connect to AWS
-    const fs = require('fs');
-    const AWS = require('aws-sdk');
-    const threshold = 0.5;
-    var nsfw = false;
-
-    const s3 = new AWS.S3({
-        accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-        region: 'eu-west-2'
-    });
-
-
-    //save file locally
-    file.mv(path, (err) => {
-        if (err) {
-            return res.status(500).send(err);
-        }
-    });
-
-    /*
-    //check if file is safe
-    const axios = require('axios');
-    const FormData = require('form-data');
-
-    data = new FormData();
-    data.append('media', fs.createReadStream(path));
-    data.append('workflow', 'wfl_bg7bUanHbgxAyWrUSluw4');
-    data.append('api_user', '1048162863');
-    data.append('api_secret', 'SMfANvuXJXSxzeq8KYfx');
-
-    await axios({
-        method: 'post',
-        url: 'https://api.sightengine.com/1.0/check-workflow.json',
-        data: data,
-        headers: data.getHeaders()
-    }).then(function (response) {
-
-        if (response.data.summary.reject_prob > threshold) {
-            console.log(response.data);
-            nsfw = true;
-        }
-
-    }).catch(function (error) {
-
-        // handle error
-        if (error.response) console.log(error.response.data);
-        else console.log(error.message);
-    });
-
-    //if not safe, delete file and redirect to post page
-    if (nsfw) {
-        fs.unlink(path, (err) => {
-            if (err) throw err;
-        });
-        return res.render('/addtomashup/' + mashupId, {
-            message: 'Inappropriate content detected. Please try again.'
-        });
-    }
-    */
-    /*
-    //if safe, upload to s3
-    else {
-        var params = {
-            Bucket: "images-mashbook",
-            Key: date + file.name,
-            ContentType: file.type,
-            ACL: 'bucket-owner-full-control',
-            Body: fs.readFileSync(path)
-        }
-
-        s3.upload(params, function (err, data) {
-            if (err) {
-                console.log(err);
-            }
-            if (data) {
-                console.log('File uploaded successfully to S3.');
-            }
-        });
-    }
-    */
-
-    //only allow jpg, jpeg, png
-    if (file.mimetype !== 'image/jpeg' && file.mimetype !== 'image/png' && file.mimetype !== 'image/jpg' && file.mimetype !== 'image/gif') {
-        return res.render('/addtomashup/' + mashupId, {
-            message: 'File type not allowed'
-        });
-    }
-
-    //only allow files under 2MB
-    if (file.size > 2000000) {
-        return res.render('post', {
-            message: 'File size too large'
-        });
-    }
-
-    file.mv(path, (err) => {
-        if (err) {
-            console.log("Already exists");
-        }
-        //get logged in username
-        jwt.verify(req.cookies.jwt, process.env.JWT_SECRET, (err, decoded) => {
-            if (err) {
-                return res.redirect('/');
-            }
-            else {
-
-                //get master picture from id
-                result = db.query('SELECT * FROM mashups WHERE mashupId = ?', [req.params.id], (err, result) => {
-                    if (err) throw err;
-
-                    let curDate2 = new Date();
-                    let year2 = curDate2.getFullYear();
-                    let month2 = curDate2.getMonth() + 1;
-                    let day2 = curDate2.getDate();
-                    let currentDate2 = year2 + "/" + month2 + "/" + day2;
-                    let masterPicture = result[0].path;
-                    let secondaryPicture = path
-                    let compositionType = req.body.sharpType
-                 
-
-                    if(compositionType == "none")
-                    {
-                        result = db.query('INSERT INTO content (mashupId, userPosted, datePosted, description, path) VALUES (?, ?, ?, ?, ?)', [contentId, decoded.username , currentDate2, description, "uploads/" + secondaryPicture.split("/")[3]], (err, result) => {
-                            if (err) throw err;
-                            return res.redirect('../gallery/' + req.params.id);
-                        });
-                    }
-                    else
-                    {
-
-                    
-                    
-                    //create image composition with sharp
-                    sharp("./public/"+masterPicture)
-                        .composite([
-                            { input: secondaryPicture, blend: compositionType , opacity: 0.5 }
-                        ])
-                        .toFile('./public/uploads/mashup' + date + "-" + file.name, (err, info) => {
-                            //if error notify user about file being too big
-                            if (err){
-                                console.log(err);
-                                return res.redirect('/errorpage');
-                            }
-                            
-                            else
-                            {
-                                //insert into content table
-                                result = db.query('INSERT INTO content (mashupId, userPosted, datePosted, description, path) VALUES (?, ?, ?, ?, ?)', [mashupId, decoded.username , date, description, "uploads/mashup" + date+ "-" + file.name], (err, result) => {
-                                    if (err) throw err;
-
-                                    return res.redirect('../gallery/' + mashupId);
-                                });
-                            }
-                        });
-                    }
-
-                });
-
-
-
-            }
-        });
-    });
-});
 
 //error page
 router.get('/errorpage', (req, res) => {
