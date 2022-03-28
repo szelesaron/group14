@@ -9,29 +9,32 @@
   <link rel="icon" href="/images/favi.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@100;300;600&family=Libre+Baskerville&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@100;300;600&family=Libre+Baskerville&display=swap"
+    rel="stylesheet">
 </head>
 
 <body>
 
   <nav class="navbar">
-        <div class="nav-wrapper">
-            <img src="/images/logograd.PNG" class="brand-img" alt="">
-            <div class="nav-items">
+    <div class="nav-wrapper">
+      <img src="/images/logograd.PNG" class="brand-img" alt="">
+      <div class="nav-items">
 
-                <button onclick="location.href='/newsfeed';" class = "icon"><img src="/images/home.PNG" class="icon" alt=""></button>
+        <button onclick="location.href='/newsfeed';" class="icon"><img src="/images/home.PNG" class="icon"
+            alt=""></button>
 
-                <button onclick="location.href='/post';" class="icon"><img src="/images/add.PNG" class="icon" alt=""></button>
+        <button onclick="location.href='/post';" class="icon"><img src="/images/add.PNG" class="icon" alt=""></button>
 
-                <button onclick="openNav()" class="icon"><img src="/images/option.PNG" class="icon" alt=""></button>
+        <button onclick="openNav()" class="icon"><img src="/images/option.PNG" class="icon" alt=""></button>
 
-                <button onclick="location.href='/profile';" class="icon user-profile"></button>
+        <button onclick="location.href='/profile';" class="icon user-profile"></button>
 
-            </div>
-        </div>
+      </div>
+    </div>
   </nav>
 
-   <div id="mySidenav" class="sidenav">
+  <div id="mySidenav" class="sidenav">
     <b>{{this.username}}</b>
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
     <a href="#">Edit Profile</a>
@@ -78,31 +81,43 @@
           <form method="POST" action="/mashit/{{this.contentId}}" enctype="multipart/form-data" required>
             <input type="file" name="myFile" required>
             <select name="sharpType" id="sharpType">
-                <option value="none">None</option>
-                <option value="overlay">Overlay</option>
-                <option value="difference">Difference</option>
-                <option value="clear">Clear</option>
-                <option value="source">Source</option>
-                <option value="over">Over</option>
-                <option value="in">In</option>
-                <option value="out">Out</option>
-                <option value="atop">Atop</option>
-                <option value="dest">Dest</option>
-                <option value="dest-over">Dest-over</option>
-                <option value="dest-in">Dest-in</option>
-                <option value="dest-out">Dest-out</option>
-                <option value="xor">xor</option>
-                <option value="add">Add</option>
-                <option value="saturate">Saturate</option>
-                <option value="multiply">Multiply</option>
-                <option value="screen">Screen</option>
-                <option value="darken">Darken</option>
-                <option value="lighten">Lighten</option>
-                <option value="colour-dodge">Colour-dodge</option>
-                <option value="colour-burn">Colour-burn</option>
-                <option value="hard-light">Hard-light</option>
-                <option value="soft-light">Soft-light</option>
-                <option value="exclusion">Exclusion</option>
+              <option value="none">None</option>
+              <option value="overlay">Overlay</option>
+              <option value="difference">Difference</option>
+              <option value="clear">Clear</option>
+              <option value="source">Source</option>
+              <option value="over">Over</option>
+              <option value="in">In</option>
+              <option value="out">Out</option>
+              <option value="atop">Atop</option>
+              <option value="dest">Dest</option>
+              <option value="dest-over">Dest-over</option>
+              <option value="dest-in">Dest-in</option>
+              <option value="dest-out">Dest-out</option>
+              <option value="xor">xor</option>
+              <option value="add">Add</option>
+              <option value="saturate">Saturate</option>
+              <option value="multiply">Multiply</option>
+              <option value="screen">Screen</option>
+              <option value="darken">Darken</option>
+              <option value="lighten">Lighten</option>
+              <option value="colour-dodge">Colour-dodge</option>
+              <option value="colour-burn">Colour-burn</option>
+              <option value="hard-light">Hard-light</option>
+              <option value="soft-light">Soft-light</option>
+              <option value="exclusion">Exclusion</option>
+            </select>
+            <select name="gravity" id="gravity">
+              <option value="center">center</option>
+              <option value="north">north</option>
+              <option value="east">east</option>
+              <option value="south">south</option>
+              <option value="west">west</option>
+              <option value="northeast">north-east</option>
+              <option value="southeast">south-east</option>
+              <option value="southwest">south-west</option>
+              <option value="northwest">north-west</option>
+            </select>
             <input type="text" name="description" placeholder="Caption" required>
             <input type="text" id="mashupId" name="mashupId" value="{{this.mashupId}}" hidden checked>
             <input type="submit" value="upload" />
@@ -113,17 +128,17 @@
           </p>
           <p class="post-time">{{this.datePosted}}</p>
         </div>
-          <p class="mashup-title">{{this.mashupTitle}}
-          </p>
-      
+        <p class="mashup-title">{{this.mashupTitle}}
+        </p>
+
       </div>
     </div>
   </section>
   </form>
   {{/each}}
-           {{#if message}}
-                <p>{{message}}</p>
-              {{/if}}
+  {{#if message}}
+  <p>{{message}}</p>
+  {{/if}}
 
 </body>
 
