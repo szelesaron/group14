@@ -368,7 +368,7 @@ router.get('/likemashupone/:id', (req, res) => {
                 if (result.length > 0) {
                     db.query('DELETE FROM likes WHERE mashupId = ? AND userLiked = ?', [req.params.id, decoded.username], (err, result) => {
                         if (err) throw err;
-                        res.redirect('/onemashup/' + req.params.id);
+                        res.redirect('/post/' + req.params.id);
                     });
 
                     //decrease like count
@@ -382,7 +382,7 @@ router.get('/likemashupone/:id', (req, res) => {
                     //increment like count
                     db.query('UPDATE mashups SET reactions = reactions + 1 WHERE mashupId = ?', [req.params.id], (err, result) => {
                         if (err) throw err;
-                        res.redirect('/onemashup/' + req.params.id);
+                        res.redirect('/post/' + req.params.id);
                     });
 
                     //add user to likes table
@@ -395,6 +395,49 @@ router.get('/likemashupone/:id', (req, res) => {
         }
     });
 });
+
+// like while viewing one mashup
+router.get('/likecontentone/:id', (req, res) => {
+        //redirect only if user is logged in
+        jwt.verify(req.cookies.jwt, process.env.JWT_SECRET, (err, decoded) => {
+            if (err) {
+                res.redirect('/');
+            } else {
+    
+                //if already liked, unlike
+                db.query('SELECT * FROM likes WHERE contentId = ? AND userLiked = ?', [req.params.id, decoded.username], (err, result) => {
+                    if (err) throw err;
+    
+                    if (result.length > 0) {
+                        db.query('DELETE FROM likes WHERE contentId = ? AND userLiked = ?', [req.params.id, decoded.username], (err, result) => {
+                            if (err) throw err;
+                            res.redirect('/post/' + req.params.id);
+                        });
+    
+                        //decrease like count
+                        db.query('UPDATE content SET reactions = reactions - 1 WHERE contentId = ?', [req.params.id], (err, result) => {
+                            if (err) throw err;
+                        });
+                    }
+    
+                    else {
+    
+                        //increment like count
+                        db.query('UPDATE content SET reactions = reactions + 1 WHERE contentId = ?', [req.params.id], (err, result) => {
+                            if (err) throw err;
+                            res.redirect('/post/' + req.params.id);
+                        });
+    
+                        //add user to likes table
+                        db.query('INSERT INTO likes (contentId, userLiked) VALUES (?, ?)', [req.params.id, decoded.username], (err, result) => {
+                            if (err) throw err;
+                        });
+                    }
+                });
+    
+            }
+        });
+    });
 //post to feed
 router.post("/upload", async (req, res) => {
     //if no file is uploaded
