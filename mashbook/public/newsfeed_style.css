@@ -256,6 +256,7 @@ button{
     object-fit: cover;
     align-self: left;
     padding-left: 2.5%;
+
 }
 
 .post-mash{
@@ -263,6 +264,7 @@ button{
     height: 98%;
     border: 1px solid #dfdfdf;
     border-radius: 10px;
+    filter: blur(4px);
 }
 
 .post-content{
