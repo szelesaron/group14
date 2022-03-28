@@ -29,7 +29,7 @@ db.query('USE users', (err, result) => {
 
 //create table
 let create_table = 
-"CREATE TABLE IF NOT EXISTS users (username VARCHAR(20)  PRIMARY KEY NOT NULL, accountType varchar(20) NOT NULL, email VARCHAR(255) NOT NULL, password VARCHAR(255) NOT NULL,  userStatus varchar(256) NOT NULL DEFAULT 'Active')";
+"CREATE TABLE IF NOT EXISTS users (username VARCHAR(20)  PRIMARY KEY NOT NULL, accountType varchar(20) NOT NULL, email VARCHAR(255) NOT NULL, password VARCHAR(255) NOT NULL,  userStatus varchar(256) NOT NULL DEFAULT 'Active', `isAdmin` int(1) NOT NULL DEFAULT 0)";
 db.query(create_table, (err, result) => {
     if (err) throw err;
 });
