@@ -51,9 +51,9 @@
     </script>
 
     <div class="foryou-weekly">
-        <button onclick="location.href='/newsfeed';"><b class="foryou">For You</b></button>
-        <button onclick=""><b class="weekly">|</b></button>
-        <button onclick=""><b class="weekly">Weekly</b></button>
+        <button onclick="location.href='/newsfeed';"><b class="weekly">For You</b></button>
+        <button onclick=""><b class="foryou">|</b></button>
+        <button onclick=""><b class="foryou">Weekly</b></button>
     </div>
 
     
@@ -91,9 +91,8 @@
 
                         <button onclick="location.href='/like/{{this.contentId}}';"><img src="/images/like.PNG" class="icon" alt=""></button>
                         <button onclick="location.href='/post/{{this.contentId}}';"><img src="/images/comment.PNG" class="icon" alt=""></button>
-                        <button><img src="/images/send.PNG" class="icon" alt=""></button>
                         <button><img src="/images/paint.PNG" class="right icon" alt=""></button>
-                        <button><img src="/images/save.PNG" class="right icon" alt=""></button>
+
                     </div>
                     <row>
                     <p class="title">{{this.mashupTitle}}</p>
