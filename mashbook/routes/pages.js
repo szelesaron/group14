@@ -1325,7 +1325,7 @@ router.get('/reportcontent/:id', (req, res) => {
     });
 });
 
-// delete content post
+// Report content post
 router.post('/contentreported/:id', (req, res) => {
 
     //get logged in username
@@ -1341,6 +1341,80 @@ router.post('/contentreported/:id', (req, res) => {
         }
     });
 });
+
+// Report mashup get 
+router.get('/reportmashup/:id', (req, res) => {
+
+
+    //get logged in username
+    jwt.verify(req.cookies.jwt, process.env.JWT_SECRET, (err, decoded) => {
+        if (err) {
+            res.redirect('/');
+        }
+        else {
+            //render item with the content ID from db
+            result = db.query('SELECT * FROM mashups WHERE mashupId = ?', [req.params.id], (err, result) => {
+                if (err) throw err;
+                res.render('reportmashup', { content: result })
+            });
+
+        }
+    });
+});
+
+// Report mashup post
+router.post('/mashupreported/:id', (req, res) => {
+
+    //get logged in username
+    jwt.verify(req.cookies.jwt, process.env.JWT_SECRET, (err, decoded) => {
+        if (err) {
+            res.redirect('/');
+        } else {
+            res.render('newsfeed', { content: result, username: decoded.username });
+            //Report content
+            result = db.query('UPDATE mashups SET mashupFlagged = 1 WHERE mashupId = ?', [req.params.id]);
+            res.redirect('/newsfeed');
+
+        }
+    });
+});
+
+// Report weekly mashup get 
+router.get('/reportweeklymashup/:id', (req, res) => {
+
+
+    //get logged in username
+    jwt.verify(req.cookies.jwt, process.env.JWT_SECRET, (err, decoded) => {
+        if (err) {
+            res.redirect('/');
+        }
+        else {
+            //render item with the content ID from db
+            result = db.query('SELECT * FROM mashups WHERE mashupId = ?', [req.params.id], (err, result) => {
+                if (err) throw err;
+                res.render('reportweeklymashup', { content: result })
+            });
+
+        }
+    });
+});
+// Report mashup post
+router.post('/mashuweeklypreported/:id', (req, res) => {
+
+    //get logged in username
+    jwt.verify(req.cookies.jwt, process.env.JWT_SECRET, (err, decoded) => {
+        if (err) {
+            res.redirect('/');
+        } else {
+            res.render('mashup', { content: result, username: decoded.username });
+            //Report content
+            result = db.query('UPDATE mashups SET mashupFlagged = 1 WHERE mashupId = ?', [req.params.id]);
+            res.redirect('/mashup');
+
+        }
+    });
+});
+
 
 // Moderation tools pages
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

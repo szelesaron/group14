@@ -1,16 +1,3 @@
-Would you like to report this content
-{{#each content}}
-
-   <form action="/contentdeleted/{{this.contentId}}" method="POST">
-      <div class="container">
-       
-        <button type="submit">Delete</button>
-      </div>
-    </form>
-   
-<a href="/newsfeed/">Back to Newsfeed</a>
-{{/each}}
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -49,17 +36,17 @@ Would you like to report this content
         <div class="upload-wrapper">
             <div class="upload">
              
-                    Would you like to report this content?
+                    Would you like to report this mashup?
 {{#each content}}
 
-   <form action="/contentreported/{{this.contentId}}" method="POST">
+   <form action="/mashupreported/{{this.mashupId}}" method="POST">
       <div class="container">
        
         <input type="submit" value="Report"></input>
       </div>
     </form>
    
-    <button type="button" onclick="javascript:history.back()">Back</button>
+ <button type="button" onclick="javascript:history.back()">Back</button>
 {{/each}}
             </div>
         </div>
