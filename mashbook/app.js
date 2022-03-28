@@ -50,7 +50,7 @@ db.query(create_table_mashups, (err, result) => {
 
 //create table for likes
 let create_table_likes =
-"CREATE TABLE IF NOT EXISTS likes (likeId INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT, contentId INT(11) NOT NULL , userLiked VARCHAR(100) NOT NULL)";
+"CREATE TABLE IF NOT EXISTS likes (likeId INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT, mashupId INT(11) NOT NULL, contentId INT(11) NOT NULL , userLiked VARCHAR(100) NOT NULL)";
 db.query(create_table_likes, (err, result) => {
     if (err) throw err;
 });

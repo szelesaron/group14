@@ -268,7 +268,47 @@ router.get('/like/:id', (req, res) => {
         }
     });
 });
+router.get('/likemashup/:id', (req, res) => {
+    //redirect only if user is logged in
+    jwt.verify(req.cookies.jwt, process.env.JWT_SECRET, (err, decoded) => {
+        if (err) {
+            res.redirect('/');
+        } else {
 
+            //if already liked, unlike
+            db.query('SELECT * FROM likes WHERE mashupId = ? AND userLiked = ?', [req.params.id, decoded.username], (err, result) => {
+                if (err) throw err;
+
+                if (result.length > 0) {
+                    db.query('DELETE FROM likes WHERE mashupId = ? AND userLiked = ?', [req.params.id, decoded.username], (err, result) => {
+                        if (err) throw err;
+                        res.redirect('/');
+                    });
+
+                    //decrease like count
+                    db.query('UPDATE mashups SET reactions = reactions - 1 WHERE mashupId = ?', [req.params.id], (err, result) => {
+                        if (err) throw err;
+                    });
+                }
+
+                else {
+
+                    //increment like count
+                    db.query('UPDATE mashups SET reactions = reactions + 1 WHERE mashupId = ?', [req.params.id], (err, result) => {
+                        if (err) throw err;
+                        res.redirect('/');
+                    });
+
+                    //add user to likes table
+                    db.query('INSERT INTO likes (mashupId, userLiked) VALUES (?, ?)', [req.params.id, decoded.username], (err, result) => {
+                        if (err) throw err;
+                    });
+                }
+            });
+
+        }
+    });
+});
 //post to feed
 router.post("/upload", async (req, res) => {
     //if no file is uploaded
