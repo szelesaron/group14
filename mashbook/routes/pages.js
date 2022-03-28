@@ -132,7 +132,7 @@ router.get('/profile', (req, res) => {
 
 
 //view another users profile
-router.get('/profile/:username', (req, res) => {
+router.get('/profilepageother/:username', (req, res) => {
     //redirect only if user is logged in
     jwt.verify(req.cookies.jwt, process.env.JWT_SECRET, (err, decoded) => {
         if (err) {
@@ -143,7 +143,7 @@ router.get('/profile/:username', (req, res) => {
                 if (err) throw err;
 
 
-                res.render('profilepage', { content: result, username: req.params.username });
+                res.render('profilepageother', { content: result, username: req.params.username });
             });
         }
     });
