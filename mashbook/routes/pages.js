@@ -568,8 +568,16 @@ router.post("/upload", async (req, res) => {
                 //insert into content table
                 result = db.query('INSERT INTO mashups (userPosted, datePosted, mashupTitle, mashupDescription, path) VALUES (?, ?, ?, ?, ?)', [decoded.username ,currentDate, mashupTitle, mashupDescription, "uploads/" + date + file.name, ""], (err, result) => {
                     if (err) throw err;
-
-                    return res.redirect('/newsfeed');
+                    else   
+                    {if (decoded.username == "MashbookTeam")
+                        {
+                            return res.redirect('/mashup');
+                        }
+                        else
+                        {
+                        return res.redirect('/newsfeed');
+                        }
+                    }   
                 });
 
             }
