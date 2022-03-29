@@ -1,6 +1,7 @@
+<link rel="stylesheet" href="style.css">
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
-    
+
     <li class="breadcrumb-item active" aria-current="page">Edit User</li>
   </ol>
 </nav>
@@ -13,7 +14,7 @@
 {{/if}}
 
 {{#each content}}
-<form method="POST" action="/adminedituser/{{this.username}}"> 
+<form method="POST" action="/adminedituser/{{this.username}}">
   <div class="col-6">
     <div class="form-floating mb-3">
       <input type="text" class="form-control" id="floatingInput" value="{{this.username}}" placeholder="username" name="username" readonly>
@@ -44,7 +45,7 @@
       <label for="floatingInput">User Status (Active/ Suspended)</label>
     </div>
   </div>
-  
+
   <div class="col-12 d-grid">
     <button class="btn btn-primary" type="submit">Submit</button>
   </div>
