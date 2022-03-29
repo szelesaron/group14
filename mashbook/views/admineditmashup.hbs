@@ -1,6 +1,7 @@
+<link rel="stylesheet" href="style.css">
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
-    
+
     <li class="breadcrumb-item active" aria-current="page">Edit Mashup</li>
   </ol>
 </nav>
@@ -13,7 +14,7 @@
 {{/if}}
 
 {{#each content}}
-<form class="row g-3 needs-validation" method="POST" action="/admineditmashup/{{this.mashupId}}" novalidate> 
+<form class="row g-3 needs-validation" method="POST" action="/admineditmashup/{{this.mashupId}}" novalidate>
   <div class="col-6">
     <div class="form-floating mb-3">
       <input type="text" class="form-control" id="floatingInput" value="{{this.userPosted}}" placeholder="userPosted" name="userPosted" readonly>
@@ -43,7 +44,7 @@
       <label for="floatingInput">Mashup Status (Active/ Suspended)</label>
     </div>
   </div>
-  
+
   <p>Remove a flag?</p>
   <div>
   <input type="radio" id="no" name="flagAnswer" value="{{this.mashupFlagged}}" hidden checked>
