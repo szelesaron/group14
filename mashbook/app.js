@@ -65,9 +65,9 @@ db.query(create_table_comments, (err, result) => {
 //insert into newsfeed
 var sql_insert = "INSERT INTO content (contentId, mashupId, description, userPosted, datePosted, path, reactions) VALUES ?";
 var values = [
-    [1, 1, 'image1' ,'Lukasz','2022-01-12', "uploads/mona.jpg\r\n", 10],
-    [2, 1, 'image2' ,'Aron', '2021-01-12', "uploads/mona.jpg\r\n", 15],
-    [3, 1, 'image3' ,'Andrew', '2022-02-02', "uploads/mona.jpg\r\n", 30]
+    [1, 1, 'image1' ,'Lukasz','2022-01-12', "uploads/mona.jpg\r\n", 0],
+    [2, 1, 'image2' ,'Aron', '2021-01-12', "uploads/mona.jpg\r\n", 0],
+    [3, 1, 'image3' ,'Andrew', '2022-02-02', "uploads/mona.jpg\r\n", 0]
 ];
 
 db.query(sql_insert, [values], (err, res) => {
